@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="nhoy official website">
+    <meta name="keywords" content="nhoy, official, website, esign, free, download, keyfree, scib, trollstore">
+    <meta name="author" content="nhoy official">
+    <meta name="theme-color" content="#000000">
+    <meta name="robots" content="index, follow">
+    
+    <title>nhoy official</title>
+
+    <link rel="icon" href="https://www.nhoy.store/photo/logo11.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<style>
+            :root {
+            --primary-color: #000000; /* Teal primary */
+            --primary-light: #000000; /* Lighter Teal */
+            --secondary-color: #000000; /* Blue Grey for secondary text */
+            --accent-color: #FFB300; /* Amber accent */
+            --accent-light: #FFCA28; /* Lighter Amber */
+            --background-color: #E0F2F1; /* Light Teal background */
+            --card-background: #ffffff;
+            --text-color: #212121; /* Darker text */
+            --header-text-color: #ffffff;
+            --vip-badge-bg: var(--accent-color); /* Amber for VIP */
+            --vip-badge-text: #ffffff; /* White text on VIP badge */
+            --icon-accent-color: var(--primary-color); /* Teal for specific icons */
+            --troll-store-progress-bg: #CFD8DC; /* Lighter Blue Grey background for progress bar */
+            --progress-fill-color: var(--accent-color); /* Amber for progress bars */
+            --navigation-active: var(--primary-color); /* Teal for active nav */
+            --navigation-inactive: #78909C; /* Blue Grey for inactive nav */
+            --banner-dot-active: var(--primary-color); /* Teal for active dots */
+            --banner-dot-inactive: #B0BEC5; /* Light Blue Grey for inactive dots */
+            --card-shadow: 0 4px 8px rgba(0,0,0,0.08); /* Softer shadow */
+            --hover-color: #00695C; /* Darker Teal for hover states */
+            --arrow-bg: #B2DFDB; /* Light Teal for arrow background */
+            --arrow-hover-bg: #05bb93; /* Slightly darker Teal for arrow hover */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .header {
+            /* Updated Gradient */
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: var(--header-text-color);
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            /* Sticky Header for better desktop experience */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .box-logo {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--background-color); /* Use main bg color */
+            margin-right: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .vip-badge {
+            background-color: var(--vip-badge-bg); /* Updated */
+            color: var(--vip-badge-text);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .user-info {
+            line-height: 1.2;
+        }
+
+        .user-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .user-phone {
+            font-size: 14px;
+        }
+
+        .notification {
+            font-size: 24px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .notification a { /* Style the link within notification */
+            color: inherit; /* Inherit color from parent */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .notification:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Card Styles --- */
+        .card {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            /* margin: 16px; */ /* Removed margin - will be handled by grid gap */
+            padding: 18px;
+            box-shadow: var(--card-shadow); /* Updated */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%; /* Ensure cards take full width within grid cell */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12); /* Slightly enhanced hover shadow */
+        }
+
+        .card-scib-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .card-scib {
+            width: 60px;
+            height: 60px;
+            min-width: 60px;
+            margin-right: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            border-radius: 12px;
+            padding: 8px;
+            box-sizing: border-box; /* Include padding */
+        }
+
+        .card-trollstore h2 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        .card-trollstore p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+
+        .data-usage {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Vertically align icon and text */
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--secondary-color);
+        }
+
+        .data-usage span:last-child a {
+            display: inline-block; /* Allows transform */
+            transition: transform 0.2s ease;
+            color: var(--icon-accent-color); /* Use theme color */
+        }
+        .data-usage span:last-child a:hover {
+            transform: scale(1.1);
+            color: var(--hover-color); /* Use hover color */
+        }
+
+        .section-title {
+            margin: 24px 0 12px 0;
+            padding: 0 16px; /* Add padding back for mobile */
+            color: var(--secondary-color);
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 16px; /* Adjust for padding */
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .section-title a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .section-title a:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        /* --- Esign Box Styles --- */
+        .box-esign {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%; /* Ensure cards take full width within grid cell */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .box-esign:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        .esign {
+            display: flex;
+            align-items: center;
+        }
+
+        .icom-esign {
+            width: 70px;
+            height: 70px;
+            min-width: 70px; /* Prevent shrinking */
+            margin-right: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--header-text-color);
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.2;
+            padding: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-sizing: border-box; /* Include padding */
+        }
+
+        .home-esign {
+            flex-grow: 1;
+        }
+
+        .home-esign h1 {
+            margin: 0 0 5px 0; /* Add bottom margin */
+            font-size: 16px;
+            color: var(--text-color);
+        }
+
+        .home-esign p {
+            margin: 0; /* Remove default margin */
+            font-size: 14px;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .home-esign p span {
+            color: var(--icon-accent-color);
+            margin-right: 5px;
+            display: flex; /* Align icon properly */
+            align-items: center;
+        }
+
+        .arow-esign {
+            font-size: 24px;
+            margin-left: 8px;
+            flex-shrink: 0; /* Prevent arrow from shrinking */
+        }
+
+        .arow-esign a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--arrow-bg);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .arow-esign a:hover {
+            background-color: var(--arrow-hover-bg);
+            transform: scale(1.1);
+        }
+
+        .arow-esign i {
+            color: var(--icon-accent-color);
+            font-size: 18px; /* Adjust icon size if needed */
+        }
+
+        /* --- Banner Styles --- */
+        .banner {
+            margin: 16px 0; /* Vertical margin only */
+            padding: 0 16px; /* Horizontal padding for mobile */
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--card-shadow);
+            height: 180px; /* Default mobile height */
+            box-sizing: border-box;
+        }
+
+        .banner-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+            margin: 0 -16px; /* Counteract parent padding to make image full width */
+        }
+
+        .banner-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            padding: 0 16px; /* Add padding back inside slide */
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent image spillover */
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area */
+            display: block;
+            border-radius: 14px; /* Apply border radius to image */
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            z-index: 5; /* Ensure dots are above image */
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--banner-dot-inactive);
+            margin: 0 6px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .dot.active {
+            background-color: var(--banner-dot-active);
+            transform: scale(1.3);
+        }
+
+        .banner-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 5; /* Ensure arrows are above image */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            opacity: 0.8;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+
+        .banner-arrow:hover {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .banner-arrow i {
+            color: var(--secondary-color);
+            font-size: 14px; /* Adjust arrow icon size */
+        }
+
+        .arrow-left {
+            left: 26px; /* Adjust for padding */
+        }
+
+        .arrow-right {
+            right: 26px; /* Adjust for padding */
+        }
+
+        /* --- Navigation Styles --- */
+        .navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--card-background);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+            border-top: 1px solid #E0E0E0;
+            z-index: 10;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: var(--navigation-inactive);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            padding: 5px 10px;
+            flex: 1; /* Make items share space evenly */
+            text-align: center;
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+            color: var(--navigation-active); /* Change color on hover too */
+        }
+        .nav-item:hover .nav-icon {
+            color: var(--navigation-active); /* Change icon color on hover */
+        }
+
+        .nav-item.active {
+            color: var(--navigation-active);
+        }
+
+        .nav-item.active .nav-icon {
+            color: var(--navigation-active);
+        }
+
+        .nav-icon {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: var(--navigation-inactive); /* Default inactive color */
+            transition: color 0.3s ease;
+        }
+        /* Apply specific icon colors directly for initial state */
+        .telegram-icon i { color: #005eff; }
+        .facebook-icon i { color: #0091ff; }
+        .youtube-icon i { color: #ff0000; }
+        .instagram-icon i { color: #ba179c; }
+
+        /* Active state will override the above colors */
+        .nav-item.active .nav-icon i,
+        .nav-item:hover .nav-icon i {
+            color: var(--navigation-active); /* Use theme active color */
+        }
+
+        /* --- Utility & Misc Styles --- */
+        .khmer-text {
+            font-family: 'Moul', 'Dangrek', 'Arial', sans-serif; /* Add fallback fonts */
+        }
+
+        .card-scib img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .card-scib img:hover {
+            transform: scale(1.1);
+        }
+
+        .icom-esign img {
+            width: 100%; /* Use percentage for slight responsiveness */
+            height: 100%;
+            max-width: 100px; /* Limit max size */
+            max-height: 100px;
+            object-fit: contain;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* ==== MODIFIED RULE: Updated pulse animation color ==== */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(255, 59, 48, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+        }
+
+        .new-item {
+            position: relative;
+            overflow: visible; /* Allow badge to overflow */
+        }
+
+        /* ==== MODIFIED RULE: Changed NEW badge color to red ==== */
+        .new-item::after {
+            content: 'NEW';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #FF3B30; /* Changed color to a vibrant red */
+            color: white;
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            z-index: 1;
+        }
+
+        /* --- End of Original CSS --- */
+        
+        /* --- Animation Keyframes --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Responsive Styles (Desktop / Wider Screens) --- */
+        @media (min-width: 768px) {
+            .main-content {
+                max-width: 1200px; /* Limit content width */
+                margin: 0 auto; /* Center the content */
+                padding: 0 32px; /* Add horizontal padding for desktop */
+            }
+            .header { padding: 16px 32px; }
+            .banner {
+                height: 300px;
+                padding: 0;
+                margin: 24px auto;
+                width: 100%;
+            }
+            .banner-container { margin: 0; }
+            .banner-slide { padding: 0; }
+            .banner img { border-radius: 14px; }
+            .arrow-left { left: 15px; }
+            .arrow-right { right: 15px; }
+
+            .esign-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                padding: 0 16px;
+            }
+            .box-esign { margin: 0; }
+            
+            .data-plan-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 20px;
+                padding: 0 16px;
+            }
+            .card { margin: 0; }
+
+            .section-title {
+                padding: 0 16px;
+                margin: 32px 0 16px 0;
+            }
+            .section-title::after { left: 16px; }
+
+            .navigation {
+                max-width: 1200px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 10px 10px 0 0;
+                box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .banner { height: 350px; }
+        }
+
+        /* --- START: CSS FOR GUIDED UNLOCK MODAL --- */
+        .gl-modal-overlay {
+            position: fixed;
+            z-index: 2000;
+            left: 40px;
+            top: 70px;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .gl-modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .gl-modal-content {
+            background-color: #ffffff;
+            padding: 24px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .gl-modal-overlay.visible .gl-modal-content {
+            transform: scale(1);
+        }
+
+        .gl-header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .gl-header h2 {
+            margin: 0 0 4px;
+            font-size: 22px;
+            color: #1a1a1a;
+        }
+
+        .gl-header p {
+            margin: 0;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .gl-close-btn {
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            color: #888;
+            cursor: pointer;
+            line-height: 30px;
+            text-align: center;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .gl-close-btn:hover {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        /* Progress Bar */
+        .gl-progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .gl-progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .gl-progress-step .gl-step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            border: 2px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #aaa;
+            margin-bottom: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .gl-progress-step span {
+            font-size: 12px;
+        }
+
+        .gl-progress-step.active {
+            color: #007bff; /* Active Step Color */
+        }
+
+        .gl-progress-step.active .gl-step-circle {
+            background-color: #e6f2ff;
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .gl-progress-step.completed .gl-step-circle {
+            background-color: #28a745; /* Completed Step Color */
+            border-color: #28a745;
+            color: white;
+        }
+
+        .gl-progress-step.completed {
+            color: #28a745;
+        }
+
+        .gl-progress-line {
+            flex-grow: 1;
+            height: 2px;
+            background-color: #ddd;
+            margin: 0 10px;
+            transform: translateY(-8px);
+        }
+
+        /* Actions */
+        .gl-actions-container {
+            overflow: hidden;
+        }
+
+        .gl-action-step {
+            display: none;
+        }
+
+        .gl-action-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gl-action-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+        .gl-action-icon.youtube { color: #CD201F; }
+        .gl-action-icon.telegram { color: #0088cc; }
+        .gl-action-icon.unlocked { color: #28a745; }
+
+        .gl-action-step h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .gl-action-step p {
+            margin: 0 0 20px;
+            color: #777;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .gl-action-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 80%;
+        }
+
+        .gl-action-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .gl-action-button i {
+            margin-right: 10px;
+        }
+
+        .gl-action-button.youtube { background-color: #CD201F; }
+        .gl-action-button.youtube:hover { background-color: #E62A29; }
+
+        .gl-action-button.telegram { background-color: #0088cc; }
+        .gl-action-button.telegram:hover { background-color: #0099e6; }
+
+        .gl-action-button.unlocked { background-color: #28a745; }
+        .gl-action-button.unlocked:hover { background-color: #2dbc4e; }
+/* --- START: CSS FOR CONTACT FOOTER --- */
+
+#footer-contact {
+    background-color: var(--primary-color); /* Using black to match the header */
+    color: #f0f0f0; /* A slightly softer white for text */
+    padding: 50px 20px;
+    margin-top: 30px; /* Space above the footer */
+    /* A subtle pattern can be nice on dark backgrounds */
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.02) 75%, transparent 75%, transparent);
+    background-size: 30px 30px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    /* Stacks on mobile, creates columns on larger screens */
+    grid-template-columns: 1fr;
+    gap: 40px; /* Space between sections */
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: var(--header-text-color); /* White headings */
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Underline effect for headings, using the accent color */
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 35px;
+    height: 3px;
+    background-color: var(--accent-color); /* Amber accent color */
+    border-radius: 2px;
+}
+
+/* About Section Styles */
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid var(--accent-light);
+}
+
+.footer-logo-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--header-text-color);
+}
+
+.about-section p {
+    line-height: 1.7;
+    color: #ccc; /* Lighter grey for paragraph text */
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--header-text-color);
+    margin-right: 10px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Links & Contact Section List Styles */
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 12px;
+}
+
+.footer-section ul a,
+.contact-info span {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-section ul a:hover {
+    color: var(--accent-color);
+    padding-left: 5px; /* Slight indent on hover */
+}
+
+.contact-info li {
+    display: flex;
+    align-items: center;
+}
+
+.contact-info i {
+    color: var(--accent-color);
+    margin-right: 12px;
+    font-size: 16px;
+    width: 20px; /* Ensures text alignment is consistent */
+    text-align: center;
+}
+
+/* Language Selector Styles */
+.language-selector a {
+    display: inline-block;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: #ccc;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.language-selector a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+}
+
+.language-selector a.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+
+/* --- Responsive Grid for Footer --- */
+@media (min-width: 768px) {
+    .footer-content {
+        /* Creates 2-4 columns depending on screen width */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* --- END: CSS FOR CONTACT FOOTER --- */
+</style>
+<body>
+    <div class="header">
+        <div class="box-logo">
+            <div class="logo">
+                <img src="https://i.pinimg.com/1200x/14/a1/71/14a171de882e567cc020668c691eba2d.jpg" alt="logo">
+            </div>
+            <div class="user-info" style="margin-left: 5px;">
+            </div>
+        </div>
+        <div class="notification">
+            
+                <i class="fa-solid fa-bars fa-lg" style="color: #ffffff;"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="banner first-banner">
+            <div class="banner-container">
+                <div class="banner-slide"><img src="https://i.pinimg.com/1200x/6d/5e/6d/6d5e6d4088a17515eb8287c61399168e.jpg" alt="Promotion Banner 1"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/40/ea/cb/40eacbbeffa90265c067db283c7cb058.jpg" alt="Promotion Banner 2"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/37/d9/2b/37d92b1e45c858409cdff8e0b1289d68.jpg" alt="Promotion Banner 3"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/72/33/d1/7233d13464b00d7bce502e4e2bfa502e.jpg" alt="Promotion Banner 4"></div>
+                <div class="banner-slide"><img src="https://i.pinimg.com/736x/ed/cb/4c/edcb4cc7bdadbfb76a8e4ff364d5eb9f.jpg" alt="Promotion Banner 5"></div>
+            </div>
+            <div class="banner-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="banner-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="dots-container"></div>
+        </div>
+
+        <div class="section-title">
+            <span>ESIGN</span>
+            <a href="#" class="khmer-text">ច្រើនទៀត</a>
+        </div>
+
+        <div class="esign-grid">
+            <div class="box-esign new-item">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Pro</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/SYKaO8" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Plus</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/q26Etj" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Standard</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/6BFC8C" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Basic</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/y8PvzI" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Free</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/XYymqT" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Free</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/1QbTEI" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Esign Icon"></div>
+                    <div class="home-esign">
+                        <h1>Esign Free</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span> ប្រើបានរយះពេល 1ឆ្នាំ .</p>
+                    </div>
+                    <div class="arow-esign"><a href="https://api.khoindvn.eu.org/qIELXJ" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <span>Roblox hack</span>
+            <a href="#" class="khmer-text">ច្រើនទៀត</a>
+        </div>
+        
+        <div class="esign-grid">
+            <div class="box-esign new-item">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://deltaios-executor.com/Icon.jpg" alt="Roblox Icon"></div>
+                    <div class="home-esign">
+                        <h1>Roblox</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://deltaios-executor.com/#popup1" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://deltaios-executor.com/Icon.jpg" alt="Roblox Icon"></div>
+                    <div class="home-esign">
+                        <h1>Roblox Android</h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://deltaios.org/delta.apk" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://krnl-ios.com/unnamed.png" alt="Key Icon"></div>
+                    <div class="home-esign">
+                        <h1> Krnl </h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://krnl-ios.com/#popup1" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+            <div class="box-esign">
+                <div class="esign">
+                    <div class="icom-esign"><img src="https://krnl-ios.com/unnamed.png" alt="Script Icon"></div>
+                    <div class="home-esign">
+                        <h1>Krnl Android </h1>
+                        <p class="khmer-text"><span><i class="fa-regular fa-clock"></i></span></p>
+                    </div>
+                    <div class="arow-esign"><a href="https://krnl.webfiles.pro/android.html" target="_blank"><i class="fa-solid fa-download fa-lg"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-title">
+            <span>Troll store</span>
+            <a href="#" class="khmer-text">ច្រើនទៀត</a>
+        </div>
+        <div class="data-plan-grid">
+            <div class="card new-item">
+                <div class="card-scib-container">
+                    <div class="card-scib"><img src="https://i.pinimg.com/474x/1c/d7/04/1cd7044b82d9ef32d1830008a262e747.jpg" alt="Troll Store Icon"></div>
+                    <div class="card-trollstore"><h2>Trollstore Premium</h2><p class="khmer-text"></p></div>
+                </div>
+                <div class="data-usage">
+                    <span class="khmer-text"></span>
+                    <span><a href="/troll.html"><i class="fa-solid fa-download fa-2xl" style="color: var(--accent-color);"></i></a></span>
+                </div>
+            </div>
+            <div class="card">
+               <div class="card-scib-container">
+                    <div class="card-scib"><img src="https://esign-ios.app/wp-content/uploads/2025/06/Esign-300x300.webp" alt="Certificate Icon"></div>
+                    <div class="card-trollstore"><h2>Certificate Eign</h2><p class="khmer-text"></p></div>
+                </div>
+                 <div class="data-usage">
+                    <span class="khmer-text"></span>
+                    <span><a href="https://t.me/nhoy200/229"><i class="fa-solid fa-download fa-2xl" style="color: var(--accent-color);"></i></a></span>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 80px;"></div>
+    </div>
+
+
+
+    <div id="guidedLockerModal" class="gl-modal-overlay" style="display: none;">
+        <div class="gl-modal-content">
+
+            <div class="gl-header">
+                <h2>Unlock Download</h2>
+                <p>Complete the steps below to continue</p>
+                <button class="gl-close-btn" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="gl-progress-bar">
+                <div class="gl-progress-step active" data-step="1">
+                    <div class="gl-step-circle">1</div>
+                    <span>Subscribe</span>
+                </div>
+                <div class="gl-progress-line"></div>
+                <div class="gl-progress-step" data-step="2">
+                    <div class="gl-step-circle">2</div>
+                    <span>Join</span>
+                </div>
+                <div class="gl-progress-line"></div>
+                <div class="gl-progress-step" data-step="3">
+                    <div class="gl-step-circle"><i class="fa-solid fa-check"></i></div>
+                    <span>Unlock</span>
+                </div>
+            </div>
+
+            <div class="gl-actions-container">
+                <div class="gl-action-step active" data-step="1">
+                    <i class="fab fa-youtube gl-action-icon youtube"></i>
+                    <h3>Subscribe on YouTube</h3>
+                    <p>Subscribe to our channel to support our work.</p>
+                    <a href="https://www.youtube.com/@xai-qq?si=uPsNoogH7OaNU__O" target="_blank" class="gl-action-button youtube" id="youtubeActionBtn">
+                        <i class="fab fa-youtube"></i>
+                        <span>Subscribe</span>
+                    </a>
+                    
+                </div>
+
+                <div class="gl-action-step" data-step="2">
+                    <i class="fab fa-telegram gl-action-icon telegram"></i>
+                    <h3>Join on Telegram</h3>
+                    <p>Join our Telegram for the latest updates.</p>
+                    <a href="https://t.me/nhoy200" target="_blank" class="gl-action-button telegram" id="telegramActionBtn">
+                        <i class="fab fa-telegram"></i>
+                        <span>Join Channel</span>
+                    </a>
+                </div>
+
+                <div class="gl-action-step" data-step="3">
+                    <i class="fa-solid fa-lock-open gl-action-icon unlocked"></i>
+                    <h3>Content Unlocked!</h3>
+                    <p>Thanks for your support! Your download is ready.</p>
+                    <button class="gl-action-button unlocked" id="unlockActionBtn">
+                        <i class="fa-solid fa-download"></i>
+                        <span> Download Esign </span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer id="footer-contact">
+        <div class="footer-content">
+            <div class="footer-section about-section">
+                <a href="#" class="footer-logo-container">
+                    <img src="https://i.pinimg.com/1200x/14/a1/71/14a171de882e567cc020668c691eba2d.jpg" alt="nhoy official Logo" class="footer-logo" loading="lazy">
+                    <span class="footer-logo-text">nhoy official</span>
+                </a>
+                <p>Your source for esign, Trollstore, and other iOS utilities. Providing free downloads and resources for the community.</p>
+                <div class="social-links">
+                    <a href="https://nhoy_11.t.me" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    <a href="https://web.facebook.com/jkj.nha.2025/?rdid=0wBfBtdXtoKp2bqC" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://youtube.com/@xai-qq?si=uPsNoogH7OaNU__O" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section links-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">ESIGN</a></li>
+                    <li><a href="#">Roblox Hack</a></li>
+                    <li><a href="#">Troll Store</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact-section">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> <span>For support, please reach out via our social channels.</span></li>
+                    <li><i class="fas fa-info-circle"></i> <span>We do not offer direct phone or email support at this time.</span></li>
+                </ul>
+            </div>
+            <div class="footer-section language-section">
+                <h3>Language</h3>
+                <div class="language-selector">
+                   <a href="#" class="active" lang="en">English</a>
+                   <a href="#" lang="km">ខ្មែរ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/main.js"></script>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script>
+        // Initialize ScrollReveal with some default settings
+        const sr = ScrollReveal({
+            distance: '50px', // How far the element moves
+            duration: 1500,   // Animation duration in ms
+            easing: 'ease-in-out', // Animation easing
+            reset: false      // Animations do not repeat on scroll up
+        });
+
+        // Reveal the main banner and section titles from the top
+        sr.reveal('.first-banner, .section-title', {
+            origin: 'top',
+            interval: 200 // Stagger delay between elements
+        });
+
+        // Reveal all cards in both grids from the bottom with a stagger effect
+        sr.reveal('.esign-grid .box-esign, .data-plan-grid .card', {
+            origin: 'bottom',
+            interval: 150 // Stagger delay between each card
+        });
+
+        // Reveal the second banner from the bottom
+         sr.reveal('.second-banner', {
+            origin: 'bottom'
+        });
+
+        // Reveal footer sections
+        sr.reveal('.footer-section', {
+            origin: 'bottom',
+            interval: 200
+        });
+    </script>
+
+</body>
+</html>
