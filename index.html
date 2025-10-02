@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="nhoy official website">
-    <title>nhoy official</title>
+    <title>nhoy Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
@@ -472,6 +472,367 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
         }
+        
+        /* --- START: LOGIN MODAL STYLES --- */
+        .login-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .login-content {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        .login-content h2 {
+            margin-bottom: 25px;
+            font-size: 26px;
+            color: #333;
+        }
+        
+        #login-form input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        #login-form button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: linear-gradient(135deg, #000000 0%, #353535 100%);
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #login-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-error-message {
+            color: #d9534f;
+            margin-top: 15px;
+            font-size: 14px;
+            height: 20px; /* Reserve space to prevent layout shift */
+        }
+        /* --- END: LOGIN MODAL STYLES --- */
+        
+        /* --- START: ADMIN DASHBOARD UI STYLES --- */
+        #admin-content {
+            color: white;
+            background: rgba(10, 20, 30, 0.4); /* Darker, slightly blue tint */
+            border-radius: 20px;
+            padding: 20px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            margin-top: 20px;
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Stat Card Specific Styles */
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-direction: row;
+        }
+
+        .stat-card i {
+            font-size: 32px;
+            color: #47fa00; /* Site accent color */
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(71, 250, 0, 0.2);
+        }
+
+        .stat-info .stat-number {
+            display: block;
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .stat-info .stat-label {
+            font-size: 14px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Management Card Specific Styles */
+        .manage-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+        
+        .manage-card h3 i {
+            color: #667eea; /* Blue accent color */
+        }
+
+        .manage-card p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .manage-card .manage-btn,
+        #add-script-form button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .manage-card .manage-btn:hover,
+        #add-script-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
+            filter: brightness(1.1);
+        }
+        
+        /* Form Styles within the Admin Card */
+        #add-script-form, #add-user-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        #add-script-form input,
+        #add-script-form textarea,
+        #add-user-form input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        #add-script-form input:focus,
+        #add-script-form textarea:focus,
+        #add-user-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+         #add-script-form textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: 'Courier New', monospace;
+         }
+
+        #add-script-form input::placeholder,
+        #add-script-form textarea::placeholder,
+        #add-user-form input::placeholder {
+            color: #888;
+        }
+
+        /* --- START: CHAT STYLES --- */
+        .chat-display {
+            height: 300px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-message {
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chat-message .timestamp {
+            font-size: 10px;
+            color: #bbb;
+            display: block;
+            margin-top: 4px;
+        }
+        .admin-message {
+            background-color: #667eea;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 3px;
+        }
+        .user-message {
+            background-color: #333;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 3px;
+        }
+        #chat-form {
+            display: flex;
+            gap: 10px;
+        }
+        #chat-input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+        }
+        #chat-send-btn {
+            padding: 12px 20px;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        /* --- END: CHAT STYLES --- */
+
+        /* --- END: ADMIN DASHBOARD UI STYLES --- */
+        
+        /* --- START: PROSTATE DATA CIRCLE STYLES --- */
+        .prostate-stat-card {
+            align-items: center; /* Center content vertically */
+        }
+
+        .prostate-stat-card h3 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px; /* More space below title */
+        }
+
+        .circle-chart {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #667eea 0% var(--p1, 0%),
+                #47fa00 var(--p1, 0%) var(--p2, 0%),
+                #d9534f var(--p2, 0%) var(--p3, 0%),
+                rgba(255, 255, 255, 0.1) var(--p3, 0%) 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .circle-chart::before { /* Inner circle to make a donut chart */
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: rgba(10, 20, 30, 0.8); /* Match admin content bg */
+            border-radius: 50%;
+        }
+
+        .circle-chart-inner-text {
+            z-index: 1;
+            text-align: center;
+        }
+
+        .circle-chart-inner-text .main-stat {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .circle-chart-inner-text .sub-stat {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .chart-legend {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 0 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .legend-color-box {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        /* --- END: PROSTATE DATA CIRCLE STYLES --- */
 
         /* Footer */
         .footer {
@@ -515,11 +876,9 @@
                 font-size: 22px;
             }
 
-            .app-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .script-grid {
+            .app-grid,
+            .script-grid,
+            .admin-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -541,6 +900,11 @@
             .arrow-right {
                 right: 10px;
             }
+            
+            /* --- HIDE USER/CHAT DATA ON MOBILE --- */
+            #user-chat-grid {
+                display: none;
+            }
         }
 
         @media (min-width: 1200px) {
@@ -560,11 +924,8 @@
         #footer-contact {
             background-color: #000000;
             color: #f0f0f0;
-            /* A slightly softer white for text */
             padding: 50px 20px;
             margin-top: 30px;
-            /* Space above the footer */
-            /* A subtle pattern can be nice on dark backgrounds */
             background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.02) 75%, transparent 75%, transparent);
             background-size: 30px 30px;
         }
@@ -573,23 +934,18 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            /* Stacks on mobile, creates columns on larger screens */
             grid-template-columns: 1fr;
             gap: 40px;
-            /* Space between sections */
         }
 
         .footer-section h3 {
             font-size: 18px;
             margin-bottom: 20px;
-            color: var(--header-text-color);
-            /* White headings */
             font-weight: bold;
             position: relative;
             padding-bottom: 10px;
         }
 
-        /* Underline effect for headings, using the accent color */
         .footer-section h3::after {
             content: '';
             position: absolute;
@@ -597,12 +953,10 @@
             left: 0;
             width: 35px;
             height: 3px;
-            background-color: var(--accent-color);
-            /* Amber accent color */
+            background-color: #667eea;
             border-radius: 2px;
         }
 
-        /* About Section Styles */
         .footer-logo-container {
             display: flex;
             align-items: center;
@@ -617,19 +971,17 @@
             border-radius: 50%;
             object-fit: cover;
             margin-right: 12px;
-            border: 2px solid var(--accent-light);
+            border: 2px solid #667eea;
         }
 
         .footer-logo-text {
             font-size: 22px;
             font-weight: bold;
-            color: var(--header-text-color);
         }
 
         .about-section p {
             line-height: 1.7;
             color: #ccc;
-            /* Lighter grey for paragraph text */
             margin-bottom: 20px;
         }
 
@@ -640,7 +992,6 @@
             width: 40px;
             height: 40px;
             background-color: rgba(255, 255, 255, 0.1);
-            color: var(--header-text-color);
             margin-right: 10px;
             border-radius: 50%;
             text-decoration: none;
@@ -649,12 +1000,10 @@
         }
 
         .social-links a:hover {
-            background-color: var(--accent-color);
-            color: var(--primary-color);
+            background-color: #667eea;
             transform: translateY(-3px);
         }
 
-        /* Links & Contact Section List Styles */
         .footer-section ul {
             list-style: none;
             padding: 0;
@@ -673,9 +1022,8 @@
         }
 
         .footer-section ul a:hover {
-            color: var(--accent-color);
+            color: #667eea;
             padding-left: 5px;
-            /* Slight indent on hover */
         }
 
         .contact-info li {
@@ -684,15 +1032,12 @@
         }
 
         .contact-info i {
-            color: var(--accent-color);
             margin-right: 12px;
             font-size: 16px;
             width: 20px;
-            /* Ensures text alignment is consistent */
             text-align: center;
         }
 
-        /* Language Selector Styles */
         .language-selector a {
             display: inline-block;
             padding: 6px 12px;
@@ -706,20 +1051,17 @@
 
         .language-selector a:hover {
             background-color: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent-color);
+            border-color: #667eea;
         }
 
         .language-selector a.active {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-            color: var(--primary-color);
+            background-color: #667eea;
+            border-color: #667eea;
             font-weight: bold;
         }
 
-        /* --- Responsive Grid for Footer --- */
         @media (min-width: 768px) {
             .footer-content {
-                /* Creates 2-4 columns depending on screen width */
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
@@ -729,76 +1071,266 @@
     <!-- Header -->
     <div class="header">
         <div class="logo">
-            <img src="https://i.pinimg.com/736x/17/94/ea/1794ea7f66d326bd3224aac4a33b67e7.jpg" alt="logo">
+            <a href="/index.html">
+                <img src="https://i.pinimg.com/736x/17/94/ea/1794ea7f66d326bd3224aac4a33b67e7.jpg" alt="logo">
+            </a>
         </div>
-        <button class="menu-btn">
+        <button class="menu-btn" id="menu-btn-action">
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Hero Slider -->
-        <div class="hero-slider" id="banner-slider">
-            <div class="slider-wrapper"></div>
-            <button class="slider-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></button>
-            <button class="slider-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></button>
-            <div class="dots-container"></div>
-        </div>
-
-        <!-- Roblox Hacks Section -->
-        <div class="section-title">
-            <h2><i class="fa-solid fa-fire"></i> Roblox Hacks</h2>
-            <a href="#">View All <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="app-grid">
-            <div class="app-card" data-app="delta">
-                <img src="https://deltaios-executor.com/Icon.jpg" alt="Delta" class="app-icon">
-                <div class="app-info">
-                    <h3>Roblox (Delta)</h3>
-                    <p>Premium executor for iOS</p>
-                </div>
-                <button class="download-btn">
-                    <i class="fa-solid fa-download"></i>
-                </button>
+        <!-- This wrapper will contain the public content that will be hidden after login -->
+        <div id="public-content">
+            <!-- Hero Slider -->
+            <div class="hero-slider" id="banner-slider">
+                <div class="slider-wrapper"></div>
+                <button class="slider-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="dots-container"></div>
             </div>
 
-            <div class="app-card" data-app="krnl">
-                <img src="https://krnl-ios.com/unnamed.png" alt="KRNL" class="app-icon">
-                <div class="app-info">
-                    <h3>Roblox (KRNL)</h3>
-                    <p>Powerful script executor</p>
+            <!-- Roblox Hacks Section -->
+            <div class="section-title">
+                <h2><i class="fa-solid fa-fire"></i> Roblox Hacks</h2>
+                <a href="#">View All <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="app-grid">
+                <div class="app-card" data-app="delta">
+                    <img src="https://deltaios-executor.com/Icon.jpg" alt="Delta" class="app-icon">
+                    <div class="app-info">
+                        <h3>Roblox (Delta)</h3>
+                        <p>Premium executor for iOS</p>
+                    </div>
+                    <button class="download-btn">
+                        <i class="fa-solid fa-download"></i>
+                    </button>
                 </div>
-                <button class="download-btn">
-                    <i class="fa-solid fa-download"></i>
-                </button>
+
+                <div class="app-card" data-app="krnl">
+                    <img src="https://krnl-ios.com/unnamed.png" alt="KRNL" class="app-icon">
+                    <div class="app-info">
+                        <h3>Roblox (KRNL)</h3>
+                        <p>Powerful script executor</p>
+                    </div>
+                    <button class="download-btn">
+                        <i class="fa-solid fa-download"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scripts Slider Section -->
+            <div class="section-title">
+                <h2><i class="fa-solid fa-code"></i> Featured Scripts</h2>
+                <a href="#">More Scripts <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="hero-slider2" id="banner-slider2">
+                <div class="slider-wrapper" id="script-slider-wrapper"></div>
+                <button class="slider-arrow arrow-left" id="script-left" style="background-color: #000000;"><i class="fa-solid fa-chevron-left" style="color: #47fa00;"></i></button>
+                <button class="slider-arrow arrow-right" id="script-right" style="background-color: #000000;"><i class="fa-solid fa-chevron-right" style="color: #15ff00;"></i></button>
+                <div class="dots-container" id="script-dots"></div>
+            </div>
+
+            <!-- All Scripts Section -->
+            <div class="section-title">
+                <h2><i class="fa-solid fa-code"></i> Popular Scripts</h2>
+                <a href="#">More Scripts <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="script-grid" id="scripts-container"></div>
+        </div>
+
+        <!-- START: NEW ADMIN CONTENT (Hidden by default) -->
+        <div id="admin-content" style="display: none;">
+            <div class="section-title" style="margin-top: 0; align-items: center;">
+                <h2><i class="fa-solid fa-tachometer-alt" style="color: #667eea;"></i> Admin Dashboard</h2>
+                <button id="logout-btn" class="manage-btn" style="width: auto; padding: 10px 20px; font-size: 14px; height: auto;"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="admin-grid" id="stats-grid">
+                <div class="admin-card stat-card">
+                    <i class="fa-solid fa-cloud-download-alt"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">1,428</span>
+                        <span class="stat-label">Total Downloads</span>
+                    </div>
+                </div>
+                <div class="admin-card stat-card">
+                    <i class="fa-solid fa-scroll"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">Featured Scripts</span>
+                    </div>
+                </div>
+                <div class="admin-card stat-card">
+                    <i class="fa-solid fa-users-viewfinder"></i>
+                    <div class="stat-info">
+                        <span class="stat-number">350</span>
+                        <span class="stat-label">Daily Visitors</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Management Grid -->
+            <div class="section-title">
+                <h2><i class="fa-solid fa-cogs" style="color: #667eea;"></i> Management Tools</h2>
+            </div>
+
+            <div class="admin-grid" id="management-grid">
+                <!-- Add New Script Card -->
+                <div class="admin-card manage-card">
+                    <h3><i class="fa-solid fa-plus-circle"></i> Add New Script</h3>
+                    <p>Add a new script to the public listings.</p>
+                    <form id="add-script-form">
+                        <input type="text" placeholder="Script Title" required>
+                        <input type="url" placeholder="Image URL" required>
+                        <textarea placeholder="Paste Script Key Here..." required></textarea>
+                        <button type="submit"><i class="fa-solid fa-plus"></i> Add Script</button>
+                    </form>
+                </div>
+
+                <!-- Manage Banners Card -->
+                <div class="admin-card manage-card">
+                    <h3><i class="fa-regular fa-images"></i> Manage Banners</h3>
+                    <p>Update, add, or remove the hero slider banners.</p>
+                    <button class="manage-btn"><i class="fa-solid fa-edit"></i> Manage Banners</button>
+                </div>
+
+                <!-- Site Settings Card -->
+                <div class="admin-card manage-card">
+                    <h3><i class="fa-solid fa-sliders"></i> Site Settings</h3>
+                    <p>Update site title, logo, and other global settings.</p>
+                    <button class="manage-btn"><i class="fa-solid fa-gear"></i> Go to Settings</button>
+                </div>
+            </div>
+
+            <!-- User Data & Chat Management System -->
+            <div id="user-chat-grid">
+                <div class="section-title">
+                    <h2><i class="fa-solid fa-users" style="color: #667eea;"></i> User & Chat Data</h2>
+                </div>
+                <div class="admin-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+                    <!-- User Management Card -->
+                    <div class="admin-card manage-card">
+                        <h3><i class="fa-solid fa-users-cog"></i> User Management</h3>
+                        <p>Add, edit, or remove users and track their usage.</p>
+                        <form id="add-user-form">
+                            <input type="text" id="username" placeholder="Username" required>
+                            <input type="number" id="usage" placeholder="Initial Usage ($)" required>
+                            <button type="submit" class="manage-btn"><i class="fa-solid fa-user-plus"></i> Add User</button>
+                        </form>
+                        <div style="overflow-x: auto; margin-top: 20px;">
+                            <table id="user-table" style="width: 100%; color: white; border-collapse: collapse;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Username</th>
+                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Join Date</th>
+                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Usage ($)</th>
+                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="user-table-body">
+                                    <!-- User data will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Live Chat Card -->
+                    <div class="admin-card manage-card">
+                        <h3><i class="fa-solid fa-comments"></i> Live Chat</h3>
+                        <p>View and respond to user messages here.</p>
+                        <div id="chat-display" class="chat-display"></div>
+                        <form id="chat-form">
+                            <input type="text" id="chat-input" placeholder="Type a message..." required autocomplete="off">
+                            <button type="submit" id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prostate Cancer Circle Data -->
+            <div class="section-title">
+                <h2><i class="fa-solid fa-chart-pie" style="color: #667eea;"></i> Prostate Cancer Statistics</h2>
+            </div>
+            <div class="admin-grid" id="prostate-stats-grid">
+                <!-- Stage at Diagnosis Card -->
+                <div class="admin-card prostate-stat-card">
+                    <h3>Stage at Diagnosis</h3>
+                    <div class="circle-chart" style="--p1: 70%; --p2: 84%; --p3: 93%;">
+                        <div class="circle-chart-inner-text">
+                            <span class="main-stat">70%</span>
+                            <span class="sub-stat">Localized</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: #667eea;"></span>
+                            <span>Localized: 70%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: #47fa00;"></span>
+                            <span>Regional: 14%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: #d9534f;"></span>
+                            <span>Distant: 9%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age at Diagnosis Card -->
+                <div class="admin-card prostate-stat-card">
+                    <h3>Age at Diagnosis (Ages 55-69)</h3>
+                    <div class="circle-chart" style="--p1: 52%; --p2: 52%; --p3: 52%;">
+                        <div class="circle-chart-inner-text">
+                            <span class="main-stat">52%</span>
+                            <span class="sub-stat">of cases</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: #667eea;"></span>
+                            <span>Ages 55-69: 52%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: rgba(255, 255, 255, 0.1);"></span>
+                            <span>Other Ages: 48%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-Year Survival Rate Card -->
+                <div class="admin-card prostate-stat-card">
+                    <h3>5-Year Relative Survival Rate</h3>
+                    <div class="circle-chart" style="--p1: 95%; --p2: 95%; --p3: 95%;">
+                         <div class="circle-chart-inner-text">
+                            <span class="main-stat">95%</span>
+                            <span class="sub-stat">Survival</span>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                         <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: #667eea;"></span>
+                            <span>Survives 5+ years: 95%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color-box" style="background-color: rgba(255, 255, 255, 0.1);"></span>
+                            <span>Mortality within 5 years: 5%</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Scripts Slider Section -->
-        <div class="section-title">
-            <h2><i class="fa-solid fa-code"></i> Featured Scripts</h2>
-            <a href="#">More Scripts <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="hero-slider2" id="banner-slider2">
-            <div class="slider-wrapper" id="script-slider-wrapper"></div>
-            <button class="slider-arrow arrow-left" id="script-left" style="background-color: #000000;"><i class="fa-solid fa-chevron-left" style="color: #47fa00;"></i></button>
-            <button class="slider-arrow arrow-right" id="script-right" style="background-color: #000000;"><i class="fa-solid fa-chevron-right" style="color: #15ff00;"></i></button>
-            <div class="dots-container" id="script-dots"></div>
-        </div>
-
-        <!-- All Scripts Section -->
-        <div class="section-title">
-            <h2><i class="fa-solid fa-code"></i> Popular Scripts</h2>
-            <a href="#">More Scripts <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="script-grid" id="scripts-container"></div>
+        <!-- END: NEW ADMIN CONTENT -->
     </div>
 
-    <!-- Modal -->
+    <!-- Download Modal -->
     <div class="modal-overlay" id="downloadModal">
         <div class="modal-content">
             <button class="close-btn">&times;</button>
@@ -813,6 +1345,22 @@
                 <i class="fa-solid fa-download"></i>
                 <span>Download Now</span>
             </button>
+        </div>
+    </div>
+    
+    <!-- LOGIN MODAL HTML -->
+    <div class="login-overlay" id="login-overlay">
+        <div class="login-content">
+            <button class="close-btn" id="close-login-btn">&times;</button>
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div style="position: relative;">
+                    <i class="fa-solid fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-75%); color: #999;"></i>
+                    <input type="password" id="password-input" placeholder="Enter Password" style="padding-left: 45px;" required>
+                </div>
+                <button type="submit">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                <p id="login-error" class="login-error-message"></p>
+            </form>
         </div>
     </div>
 
@@ -853,7 +1401,7 @@
                 <h3>Language</h3>
                 <div class="language-selector">
                     <a href="#" class="active" lang="en">English</a>
-                    <a href="#" lang="km">ខ្មែរ</a>
+                    <a href="#" lang="km">ខ្མែរ</a>
                 </div>
             </div>
         </div>
@@ -928,203 +1476,429 @@
             }
         };
 
-        // Initialize Banner Slider
-        const sliderWrapper = document.querySelector('#banner-slider .slider-wrapper');
-        const dotsContainer = document.querySelector('#banner-slider .dots-container');
-        let currentSlide = 0;
+        document.addEventListener('DOMContentLoaded', () => {
 
-        banners.forEach((banner, idx) => {
-            const slide = document.createElement('div');
-            slide.className = 'slide';
-            slide.innerHTML = `<img src="${banner}" alt="Banner ${idx + 1}">`;
-            sliderWrapper.appendChild(slide);
+            // Initialize Banner Slider
+            const sliderWrapper = document.querySelector('#banner-slider .slider-wrapper');
+            const dotsContainer = document.querySelector('#banner-slider .dots-container');
+            let currentSlide = 0;
 
-            const dot = document.createElement('span');
-            dot.className = 'dot';
-            if (idx === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(idx));
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateSlider() {
-            sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-            document.querySelectorAll('#banner-slider .dot').forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentSlide);
-            });
-        }
-
-        function goToSlide(idx) {
-            currentSlide = idx;
-            updateSlider();
-        }
-
-        document.querySelector('#banner-slider .arrow-left').addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + banners.length) % banners.length;
-            updateSlider();
-        });
-
-        document.querySelector('#banner-slider .arrow-right').addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % banners.length;
-            updateSlider();
-        });
-
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % banners.length;
-            updateSlider();
-        }, 5000);
-
-        // Script Card Creator Function
-        function createScriptCard(script) {
-            const card = document.createElement('div');
-            card.className = 'script-card';
-            card.innerHTML = `
-                <img src="${script.image}" alt="${script.title}" class="script-image">
-                <div class="script-content">
-                    <h3 class="script-title">${script.title}</h3>
-                    <div class="key-box">${script.key}</div>
-                    <button class="copy-button">
-                        <i class="fa-solid fa-copy"></i>
-                        <span>Copy Script</span>
-                    </button>
-                </div>
-            `;
-
-            const copyBtn = card.querySelector('.copy-button');
-            copyBtn.addEventListener('click', () => {
-                navigator.clipboard.writeText(script.key);
-                copyBtn.classList.add('copied');
-                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i><span>Copied!</span>';
-                setTimeout(() => {
-                    copyBtn.classList.remove('copied');
-                    copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i><span>Copy Script</span>';
-                }, 2000);
-            });
-
-            return card;
-        }
-
-        // --- START: MODIFIED SCRIPT SLIDER LOGIC ---
-
-        const scriptSliderWrapper = document.getElementById('script-slider-wrapper');
-        const scriptDotsContainer = document.getElementById('script-dots');
-        let currentScriptSlide = 0;
-        let totalScriptPages = 0;
-
-        function setupScriptSlider() {
-            // Clear previous slider content
-            scriptSliderWrapper.innerHTML = '';
-            scriptDotsContainer.innerHTML = '';
-            currentScriptSlide = 0;
-
-            // Determine scripts per page based on window width
-            const scriptsPerPage = window.innerWidth <= 768 ? 1 : 3;
-            
-            totalScriptPages = Math.ceil(allScripts.length / scriptsPerPage);
-
-            // Create slider pages
-            for (let i = 0; i < totalScriptPages; i++) {
-                const page = document.createElement('div');
-                page.className = 'slider-page';
-
-                const grid = document.createElement('div');
-                grid.className = 'script-grid';
-                // Use CSS variable to set column count for the grid inside the slider
-                grid.style.setProperty('--scripts-per-page', scriptsPerPage);
-
-
-                const startIdx = i * scriptsPerPage;
-                const endIdx = Math.min(startIdx + scriptsPerPage, allScripts.length);
-
-                for (let j = startIdx; j < endIdx; j++) {
-                    grid.appendChild(createScriptCard(allScripts[j]));
-                }
-
-                page.appendChild(grid);
-                scriptSliderWrapper.appendChild(page);
+            banners.forEach((banner, idx) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                slide.innerHTML = `<img src="${banner}" alt="Banner ${idx + 1}" loading="lazy">`;
+                sliderWrapper.appendChild(slide);
 
                 const dot = document.createElement('span');
                 dot.className = 'dot';
-                if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToScriptSlide(i));
-                scriptDotsContainer.appendChild(dot);
-            }
-             updateScriptSlider();
-        }
-
-        function updateScriptSlider() {
-            scriptSliderWrapper.style.transform = `translateX(-${currentScriptSlide * 100}%)`;
-            document.querySelectorAll('#script-dots .dot').forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === currentScriptSlide);
+                if (idx === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(idx));
+                dotsContainer.appendChild(dot);
             });
-        }
 
-        function goToScriptSlide(idx) {
-            currentScriptSlide = idx;
-            updateScriptSlider();
-        }
+            function updateSlider() {
+                sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+                document.querySelectorAll('#banner-slider .dot').forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentSlide);
+                });
+            }
 
-        document.getElementById('script-left').addEventListener('click', () => {
-            currentScriptSlide = (currentScriptSlide - 1 + totalScriptPages) % totalScriptPages;
-            updateScriptSlider();
-        });
+            function goToSlide(idx) {
+                currentSlide = idx;
+                updateSlider();
+            }
 
-        document.getElementById('script-right').addEventListener('click', () => {
-            currentScriptSlide = (currentScriptSlide + 1) % totalScriptPages;
-            updateScriptSlider();
-        });
+            document.querySelector('#banner-slider .arrow-left').addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + banners.length) % banners.length;
+                updateSlider();
+            });
 
-        // Initial setup
-        setupScriptSlider();
+            document.querySelector('#banner-slider .arrow-right').addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % banners.length;
+                updateSlider();
+            });
 
-        // Re-setup on window resize
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(setupScriptSlider, 250);
-        });
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % banners.length;
+                updateSlider();
+            }, 5000);
 
-        // --- END: MODIFIED SCRIPT SLIDER LOGIC ---
+            // Script Card Creator Function
+            function createScriptCard(script) {
+                const card = document.createElement('div');
+                card.className = 'script-card';
+                card.innerHTML = `
+                    <img src="${script.image}" alt="${script.title}" class="script-image" loading="lazy">
+                    <div class="script-content">
+                        <h3 class="script-title">${script.title}</h3>
+                        <div class="key-box">${script.key}</div>
+                        <button class="copy-button">
+                            <i class="fa-solid fa-copy"></i>
+                            <span>Copy Script</span>
+                        </button>
+                    </div>
+                `;
 
-        // Render All Scripts Section (This uses the CSS media queries)
-        const scriptsContainer = document.getElementById('scripts-container');
-        allScripts.forEach(script => {
-            scriptsContainer.appendChild(createScriptCard(script));
-        });
+                const copyBtn = card.querySelector('.copy-button');
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText(script.key);
+                    copyBtn.classList.add('copied');
+                    copyBtn.innerHTML = '<i class="fa-solid fa-check"></i><span>Copied!</span>';
+                    setTimeout(() => {
+                        copyBtn.classList.remove('copied');
+                        copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i><span>Copy Script</span>';
+                    }, 2000);
+                });
 
-        // Modal functionality
-        const modal = document.getElementById('downloadModal');
-        const modalIcon = document.getElementById('modal-icon');
-        const modalAppName = document.getElementById('modal-app-name');
-        const finalDownloadBtn = document.getElementById('final-download');
-        const closeBtn = modal.querySelector('.close-btn');
-        let currentDownloadUrl = '';
+                return card;
+            }
 
-        document.querySelectorAll('.app-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (e.target.closest('.download-btn')) {
-                    const appType = card.dataset.app;
-                    const app = apps[appType];
-                    modalIcon.src = app.icon;
-                    modalAppName.textContent = app.name;
-                    currentDownloadUrl = app.url;
-                    modal.classList.add('visible');
+            // --- START: MODIFIED SCRIPT SLIDER LOGIC ---
+            const scriptSliderWrapper = document.getElementById('script-slider-wrapper');
+            const scriptDotsContainer = document.getElementById('script-dots');
+            let currentScriptSlide = 0;
+            let totalScriptPages = 0;
+
+            function setupScriptSlider() {
+                scriptSliderWrapper.innerHTML = '';
+                scriptDotsContainer.innerHTML = '';
+                currentScriptSlide = 0;
+                const scriptsPerPage = window.innerWidth <= 768 ? 1 : 3;
+                totalScriptPages = Math.ceil(allScripts.length / scriptsPerPage);
+
+                for (let i = 0; i < totalScriptPages; i++) {
+                    const page = document.createElement('div');
+                    page.className = 'slider-page';
+                    const grid = document.createElement('div');
+                    grid.className = 'script-grid';
+                    grid.style.setProperty('--scripts-per-page', scriptsPerPage);
+                    const startIdx = i * scriptsPerPage;
+                    const endIdx = Math.min(startIdx + scriptsPerPage, allScripts.length);
+                    for (let j = startIdx; j < endIdx; j++) {
+                        grid.appendChild(createScriptCard(allScripts[j]));
+                    }
+                    page.appendChild(grid);
+                    scriptSliderWrapper.appendChild(page);
+                    const dot = document.createElement('span');
+                    dot.className = 'dot';
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToScriptSlide(i));
+                    scriptDotsContainer.appendChild(dot);
+                }
+                updateScriptSlider();
+            }
+
+            function updateScriptSlider() {
+                scriptSliderWrapper.style.transform = `translateX(-${currentScriptSlide * 100}%)`;
+                document.querySelectorAll('#script-dots .dot').forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentScriptSlide);
+                });
+            }
+
+            function goToScriptSlide(idx) {
+                currentScriptSlide = idx;
+                updateScriptSlider();
+            }
+
+            document.getElementById('script-left').addEventListener('click', () => {
+                currentScriptSlide = (currentScriptSlide - 1 + totalScriptPages) % totalScriptPages;
+                updateScriptSlider();
+            });
+
+            document.getElementById('script-right').addEventListener('click', () => {
+                currentScriptSlide = (currentScriptSlide + 1) % totalScriptPages;
+                updateScriptSlider();
+            });
+
+            setupScriptSlider();
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(setupScriptSlider, 250);
+            });
+            // --- END: MODIFIED SCRIPT SLIDER LOGIC ---
+
+            const scriptsContainer = document.getElementById('scripts-container');
+            allScripts.forEach(script => {
+                scriptsContainer.appendChild(createScriptCard(script));
+            });
+
+            // Modal functionality
+            const modal = document.getElementById('downloadModal');
+            const modalIcon = document.getElementById('modal-icon');
+            const modalAppName = document.getElementById('modal-app-name');
+            const finalDownloadBtn = document.getElementById('final-download');
+            const closeBtn = modal.querySelector('.close-btn');
+            let currentDownloadUrl = '';
+
+            document.querySelectorAll('.app-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.download-btn')) {
+                        const appType = card.dataset.app;
+                        const app = apps[appType];
+                        modalIcon.src = app.icon;
+                        modalAppName.textContent = app.name;
+                        currentDownloadUrl = app.url;
+                        modal.classList.add('visible');
+                    }
+                });
+            });
+
+            finalDownloadBtn.addEventListener('click', () => {
+                window.open(currentDownloadUrl, '_blank');
+                modal.classList.remove('visible');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('visible');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('visible');
                 }
             });
-        });
+            
+            // --- START: LOGIN FUNCTIONALITY ---
+            const menuBtn = document.getElementById('menu-btn-action');
+            const loginOverlay = document.getElementById('login-overlay');
+            const closeLoginBtn = document.getElementById('close-login-btn');
+            const loginForm = document.getElementById('login-form');
+            const passwordInput = document.getElementById('password-input');
+            const loginError = document.getElementById('login-error');
+            const publicContent = document.getElementById('public-content');
+            const adminContent = document.getElementById('admin-content');
+            
+            const CORRECT_PASSWORD = "nhoy";
+            
+            menuBtn.addEventListener('click', () => {
+                loginOverlay.style.display = 'flex';
+                setTimeout(() => passwordInput.focus(), 100);
+            });
+            
+            closeLoginBtn.addEventListener('click', () => {
+                loginOverlay.style.display = 'none';
+                loginError.textContent = '';
+            });
 
-        finalDownloadBtn.addEventListener('click', () => {
-            window.open(currentDownloadUrl, '_blank');
-            modal.classList.remove('visible');
-        });
+            loginOverlay.addEventListener('click', (e) => {
+                if (e.target === loginOverlay) {
+                    loginOverlay.style.display = 'none';
+                    loginError.textContent = '';
+                }
+            });
+            
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const enteredPassword = passwordInput.value;
+                
+                if (enteredPassword === CORRECT_PASSWORD) {
+                    loginForm.innerHTML = '<h3 style="color: #28a745;"><i class="fa-solid fa-check-circle"></i> Access Granted</h3>';
+                    setTimeout(() => {
+                        loginOverlay.style.display = 'none';
+                        publicContent.style.display = 'none';
+                        adminContent.style.display = 'block';
+                    }, 1000);
+                    
+                } else {
+                    loginForm.style.animation = 'shake 0.5s';
+                    loginError.textContent = 'Incorrect password.';
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    setTimeout(() => {
+                        loginForm.style.animation = '';
+                    }, 500);
+                }
+            });
 
-        closeBtn.addEventListener('click', () => {
-            modal.classList.remove('visible');
-        });
+            const styleSheet = document.createElement("style");
+            styleSheet.innerText = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-10px); }
+                    50% { transform: translateX(10px); }
+                    75% { transform: translateX(-10px); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+            // --- END: LOGIN FUNCTIONALITY ---
 
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('visible');
+            // --- START: ADMIN PANEL INTERACTIVITY ---
+            const addScriptForm = document.getElementById('add-script-form');
+
+            if (addScriptForm) {
+                addScriptForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const submitBtn = addScriptForm.querySelector('button');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                    addScriptForm.reset();
+
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.style.background = '';
+                        alert('Script added to database (Demo Mode).');
+                    }, 1500);
+                });
+
+                document.querySelectorAll('.manage-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        if (!e.target.closest('form') && btn.id !== 'logout-btn') {
+                            alert('This feature is not available in the demo.');
+                        }
+                    });
+                });
             }
+            // --- END: ADMIN PANEL INTERACTIVITY ---
+
+            // --- START: LOGOUT FUNCTIONALITY ---
+            document.getElementById('logout-btn').addEventListener('click', () => {
+                adminContent.style.display = 'none';
+                publicContent.style.display = 'block';
+                // Also reset the login form in case it was left in a success state
+                loginForm.innerHTML = `
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-75%); color: #999;"></i>
+                        <input type="password" id="password-input" placeholder="Enter Password" style="padding-left: 45px;" required>
+                    </div>
+                    <button type="submit">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+                    <p id="login-error" class="login-error-message"></p>
+                 `;
+            });
+            // --- END: LOGOUT FUNCTIONALITY ---
+
+            // --- START: USER DATA MANAGEMENT ---
+            const addUserForm = document.getElementById('add-user-form');
+            const userTableBody = document.getElementById('user-table-body');
+            
+            // Default user data to show if local storage is empty
+            const defaultUsers = [
+                { username: 'xX_Gamer_Xx', usage: 250, joinDate: new Date('2024-05-10T10:00:00Z').toISOString() },
+                { username: 'ScriptMaster', usage: 80, joinDate: new Date('2024-06-21T15:30:00Z').toISOString() },
+                { username: 'User123', usage: 120, joinDate: new Date('2024-07-01T08:45:00Z').toISOString() }
+            ];
+
+            let users = JSON.parse(localStorage.getItem('users'));
+
+            if (!users || users.length === 0) {
+                users = defaultUsers;
+                localStorage.setItem('users', JSON.stringify(users));
+            }
+
+            const renderUsers = () => {
+                userTableBody.innerHTML = '';
+                users.forEach((user, index) => {
+                    const row = `
+                        <tr data-index="${index}">
+                            <td style="padding: 10px;">${user.username}</td>
+                            <td style="padding: 10px;">${new Date(user.joinDate).toLocaleDateString()}</td>
+                            <td style="padding: 10px;">${user.usage}</td>
+                            <td style="padding: 10px;">
+                                <button class="edit-usage-btn manage-btn" style="width: auto; padding: 5px 10px; font-size: 12px;">Edit</button>
+                                <button class="delete-user-btn manage-btn" style="width: auto; padding: 5px 10px; font-size: 12px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    userTableBody.insertAdjacentHTML('beforeend', row);
+                });
+            };
+
+            addUserForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const usage = document.getElementById('usage').value;
+                users.push({ username, usage, joinDate: new Date().toISOString() });
+                localStorage.setItem('users', JSON.stringify(users));
+                renderUsers();
+                addUserForm.reset();
+            });
+
+            userTableBody.addEventListener('click', (e) => {
+                const row = e.target.closest('tr');
+                if (!row) return;
+                const index = parseInt(row.dataset.index, 10);
+
+                if (e.target.classList.contains('edit-usage-btn')) {
+                    const newUsage = prompt('Enter new usage amount:', users[index].usage);
+                    if (newUsage && !isNaN(newUsage)) {
+                        users[index].usage = newUsage;
+                        localStorage.setItem('users', JSON.stringify(users));
+                        renderUsers();
+                    }
+                }
+
+                if (e.target.classList.contains('delete-user-btn')) {
+                    if (confirm('Are you sure you want to delete this user?')) {
+                        users.splice(index, 1);
+                        localStorage.setItem('users', JSON.stringify(users));
+                        renderUsers();
+                    }
+                }
+            });
+            renderUsers();
+            // --- END: USER DATA MANAGEMENT ---
+
+            // --- START: CHAT DATA STORE ---
+            const chatDisplay = document.getElementById('chat-display');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+
+            const renderChat = () => {
+                chatDisplay.innerHTML = '';
+                chatHistory.forEach(msg => {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = `chat-message ${msg.sender.toLowerCase()}-message`;
+                    
+                    const textSpan = document.createElement('span');
+                    textSpan.textContent = msg.text;
+                    
+                    const timeSpan = document.createElement('span');
+                    timeSpan.className = 'timestamp';
+                    timeSpan.textContent = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    msgDiv.appendChild(textSpan);
+                    msgDiv.appendChild(timeSpan);
+                    chatDisplay.appendChild(msgDiv);
+                });
+                chatDisplay.scrollTop = chatDisplay.scrollHeight;
+            };
+
+            const saveChat = () => {
+                localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+            };
+
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const messageText = chatInput.value.trim();
+                if (messageText) {
+                    const newMessage = {
+                        sender: 'Admin',
+                        text: messageText,
+                        timestamp: new Date()
+                    };
+                    chatHistory.push(newMessage);
+                    saveChat();
+                    renderChat();
+                    chatInput.value = '';
+
+                    // Simulate a user reply
+                    setTimeout(() => {
+                        const userReply = {
+                           sender: 'User',
+                           text: 'Thanks for the message! I will get back to you shortly.',
+                           timestamp: new Date()
+                        };
+                        chatHistory.push(userReply);
+                        saveChat();
+                        renderChat();
+                    }, 1500);
+                }
+            });
+
+            renderChat();
+            // --- END: CHAT DATA STORE ---
         });
     </script>
 </body>
