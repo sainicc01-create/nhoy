@@ -7,1068 +7,874 @@
     <title>nhoy Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #000000 40%, hsla(186, 95%, 8%, 0.815) 60%);
-            min-height: 100vh;
-            color: #333;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid #667eea;
-            transition: transform 0.3s ease;
-        }
-
-        .logo img:hover {
-            transform: scale(1.1);
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-btn:hover {
-            transform: rotate(90deg);
-        }
-
-        /* Main Container */
-        .main-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Hero Banner Slider */
-        .hero-slider {
-            position: relative;
-            max-width: 100%;
-            max-height: 800px;
-            margin: 20px auto 40px;
-            border-radius: 2px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .slider-wrapper {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .slide {
-            flex: 0 0 100%;
-            position: relative;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            font-size: 18px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slider-arrow:hover {
-            background: white;
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .arrow-left {
-            left: 15px;
-        }
-
-        .arrow-right {
-            right: 15px;
-        }
-
-        .dots-container {
-            text-align: center;
-            padding: 15px 0;
-            position: absolute;
-            bottom: -10px;
-            width: 100%;
-        }
-
-        .dot {
-            height: 10px;
-            width: 10px;
-            margin: 0 5px;
-            background-color: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            display: inline-block;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: white;
-            width: 30px;
-            border-radius: 5px;
-        }
-
-        /* Section Title */
-        .section-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 40px 0 20px;
-            padding: 0 10px;
-        }
-
-        .section-title h2 {
-            font-size: 28px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .section-title a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-
-        .section-title a:hover {
-            color: white;
-        }
-
-        /* App Grid */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .app-card {
-            background: rgb(255, 255, 255);
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            object-fit: cover;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .app-info {
-            flex: 1;
-        }
-
-        .app-info h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .app-info p {
-            font-size: 13px;
-            color: #666;
-        }
-
-        .download-btn {
-            background: linear-gradient(135deg, #000000 0%, #000000 100%);
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Script Slider Styles */
-        .hero-slider2 {
-            position: relative;
-            max-width: 100%;
-            margin: 40px auto;
-            overflow: hidden;
-        }
-
-        .hero-slider2 .slider-wrapper {
-            display: flex;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .hero-slider2 .slider-page {
-            flex: 0 0 100%;
-            min-width: 100%;
-        }
-
-        /* Script Cards */
-        .script-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        /* Specific override for the slider's internal grid */
-        .hero-slider2 .script-grid {
-             grid-template-columns: repeat(var(--scripts-per-page, 3), 1fr);
-        }
-
-
-        .script-card {
-            background: rgba(255, 255, 255, 0.959);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .script-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .script-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .script-content {
-            padding: 20px;
-        }
-
-        .script-title {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-
-        .key-box {
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #495057;
-            word-wrap: break-word;
-            max-height: 100px;
-            overflow-y: auto;
-        }
-
-        .copy-button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #a7a8ac 0%, #1a191b 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .copy-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .copy-button.copied {
-            background: linear-gradient(135deg, #039625 0%, #03c288 100%);
-        }
-
-        /* Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-overlay.visible {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            position: relative;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .modal-header h2 {
-            font-size: 24px;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .modal-header p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: #999;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover {
-            color: #333;
-        }
-
-        .modal-app-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 22px;
-            margin: 0 auto 20px;
-            display: block;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-app-name {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #333;
-            text-align: center;
-        }
-
-        .modal-description {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .unlock-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .unlock-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
-        }
-        
-        /* --- START: LOGIN MODAL STYLES --- */
-        .login-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .login-content {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
-            text-align: center;
-            position: relative;
-            animation: slideUp 0.4s ease;
-        }
-
-        .login-content h2 {
-            margin-bottom: 25px;
-            font-size: 26px;
-            color: #333;
-        }
-        
-        #login-form input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-
-        #login-form button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            background: linear-gradient(135deg, #000000 0%, #353535 100%);
-            color: white;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        #login-form button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .login-error-message {
-            color: #d9534f;
-            margin-top: 15px;
-            font-size: 14px;
-            height: 20px; /* Reserve space to prevent layout shift */
-        }
-        /* --- END: LOGIN MODAL STYLES --- */
-        
-        /* --- START: ADMIN DASHBOARD UI STYLES --- */
-        #admin-content {
-            color: white;
-            background: rgba(10, 20, 30, 0.4); /* Darker, slightly blue tint */
-            border-radius: 20px;
-            padding: 20px 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            margin-top: 20px;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .admin-card {
-            background: rgba(255, 255, 255, 0.07);
-            border-radius: 15px;
-            padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .admin-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        /* Stat Card Specific Styles */
-        .stat-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-direction: row;
-        }
-
-        .stat-card i {
-            font-size: 32px;
-            color: #47fa00; /* Site accent color */
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            width: 64px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(71, 250, 0, 0.2);
-        }
-
-        .stat-info .stat-number {
-            display: block;
-            font-size: 32px;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.2;
-        }
-
-        .stat-info .stat-label {
-            font-size: 14px;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Management Card Specific Styles */
-        .manage-card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-        }
-        
-        .manage-card h3 i {
-            color: #667eea; /* Blue accent color */
-        }
-
-        .manage-card p {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-        
-        .manage-card .manage-btn,
-        #add-script-form button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-        }
-
-        .manage-card .manage-btn:hover,
-        #add-script-form button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
-            filter: brightness(1.1);
-        }
-        
-        /* Form Styles within the Admin Card */
-        #add-script-form, #add-user-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        #add-script-form input,
-        #add-script-form textarea,
-        #add-user-form input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-            transition: border-color 0.3s;
-        }
-
-        #add-script-form input:focus,
-        #add-script-form textarea:focus,
-        #add-user-form input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-         #add-script-form textarea {
-            resize: vertical;
-            min-height: 80px;
-            font-family: 'Courier New', monospace;
-         }
-
-        #add-script-form input::placeholder,
-        #add-script-form textarea::placeholder,
-        #add-user-form input::placeholder {
-            color: #888;
-        }
-
-        /* --- START: CHAT STYLES --- */
-        .chat-display {
-            height: 300px;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .chat-message {
-            padding: 8px 12px;
-            border-radius: 15px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        .chat-message .timestamp {
-            font-size: 10px;
-            color: #bbb;
-            display: block;
-            margin-top: 4px;
-        }
-        .admin-message {
-            background-color: #667eea;
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 3px;
-        }
-        .user-message {
-            background-color: #333;
-            color: white;
-            align-self: flex-start;
-            border-bottom-left-radius: 3px;
-        }
-        #chat-form {
-            display: flex;
-            gap: 10px;
-        }
-        #chat-input {
-            flex-grow: 1;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-        }
-        #chat-send-btn {
-            padding: 12px 20px;
-            border: none;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        /* --- END: CHAT STYLES --- */
-
-        /* --- END: ADMIN DASHBOARD UI STYLES --- */
-        
-        /* --- START: PROSTATE DATA CIRCLE STYLES --- */
-        .prostate-stat-card {
-            align-items: center; /* Center content vertically */
-        }
-
-        .prostate-stat-card h3 {
-            text-align: center;
-            width: 100%;
-            margin-bottom: 20px; /* More space below title */
-        }
-
-        .circle-chart {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(
-                #667eea 0% var(--p1, 0%),
-                #47fa00 var(--p1, 0%) var(--p2, 0%),
-                #d9534f var(--p2, 0%) var(--p3, 0%),
-                rgba(255, 255, 255, 0.1) var(--p3, 0%) 100%
-            );
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .circle-chart::before { /* Inner circle to make a donut chart */
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: rgba(10, 20, 30, 0.8); /* Match admin content bg */
-            border-radius: 50%;
-        }
-
-        .circle-chart-inner-text {
-            z-index: 1;
-            text-align: center;
-        }
-
-        .circle-chart-inner-text .main-stat {
-            font-size: 32px;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .circle-chart-inner-text .sub-stat {
-            font-size: 14px;
-            color: #aaa;
-        }
-
-        .chart-legend {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 0 15px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #ccc;
-        }
-
-        .legend-color-box {
-            width: 15px;
-            height: 15px;
-            border-radius: 3px;
-            margin-right: 10px;
-        }
-        /* --- END: PROSTATE DATA CIRCLE STYLES --- */
-
-        /* Footer */
-        .footer {
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .footer p {
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 24px;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-3px);
-            color: #667eea;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .slide img {
-                height: 250px;
-            }
-
-            .section-title h2 {
-                font-size: 22px;
-            }
-
-            .app-grid,
-            .script-grid,
-            .admin-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* Override for slider grid on mobile */
-            .hero-slider2 .script-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .slider-arrow {
-                width: 35px;
-                height: 35px;
-                font-size: 14px;
-            }
-
-            .arrow-left {
-                left: 10px;
-            }
-
-            .arrow-right {
-                right: 10px;
-            }
-            
-            /* --- HIDE USER/CHAT DATA ON MOBILE --- */
-            #user-chat-grid {
-                display: none;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .slide img {
-                height: 500px;
-            }
-
-            .app-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .script-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        #footer-contact {
-            background-color: #000000;
-            color: #f0f0f0;
-            padding: 50px 20px;
-            margin-top: 30px;
-            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.02) 75%, transparent 75%, transparent);
-            background-size: 30px 30px;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-        }
-
-        .footer-section h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 35px;
-            height: 3px;
-            background-color: #667eea;
-            border-radius: 2px;
-        }
-
-        .footer-logo-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .footer-logo {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 12px;
-            border: 2px solid #667eea;
-        }
-
-        .footer-logo-text {
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .about-section p {
-            line-height: 1.7;
-            color: #ccc;
-            margin-bottom: 20px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin-right: 10px;
-            border-radius: 50%;
-            text-decoration: none;
-            font-size: 18px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: #667eea;
-            transform: translateY(-3px);
-        }
-
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-section ul a,
-        .contact-info span {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease, padding-left 0.3s ease;
-        }
-
-        .footer-section ul a:hover {
-            color: #667eea;
-            padding-left: 5px;
-        }
-
-        .contact-info li {
-            display: flex;
-            align-items: center;
-        }
-
-        .contact-info i {
-            margin-right: 12px;
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .language-selector a {
-            display: inline-block;
-            padding: 6px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            color: #ccc;
-            text-decoration: none;
-            margin-right: 10px;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .language-selector a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: #667eea;
-        }
-
-        .language-selector a.active {
-            background-color: #667eea;
-            border-color: #667eea;
-            font-weight: bold;
-        }
-
-        @media (min-width: 768px) {
-            .footer-content {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
+      :root {
+          --bg-color: #fdf6f8;
+          --card-bg-color: #ffffff;
+          --text-color: #5c5470;
+          --border-color: #2d283e;
+          --shadow-color: #dcb6ff;
+          --placeholder-bg: #f5f3f7;
+          --accent-pink: #ffabe7;
+          --accent-blue: #a6d8ff;
+          --accent-green: #a8e6cf;
+      }
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          background: linear-gradient(135deg, #000000 40%, hsla(186, 95%, 8%, 0.815) 60%);
+          min-height: 100vh;
+          color: #333;
+      }
+
+      /* Header */
+      .header {
+          background: rgba(0, 0, 0, 0.9);
+          backdrop-filter: blur(10px);
+          padding: 15px 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo img {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          border: 2px solid #667eea;
+          transition: transform 0.3s ease;
+      }
+
+      .logo img:hover {
+          transform: scale(1.1);
+      }
+
+      .menu-btn {
+          background: none;
+          border: none;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+      }
+
+      .menu-btn:hover {
+          transform: rotate(90deg);
+      }
+
+      /* Main Container */
+      .main-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 20px;
+      }
+
+      /* Hero Banner Slider & General Slider Styles */
+      .hero-slider, .hero-slider2 {
+          position: relative;
+          max-width: 100%;
+          margin: 20px auto 40px;
+          overflow: hidden;
+      }
+      .hero-slider {
+          max-height: 800px;
+          border-radius: 2px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .slider-wrapper {
+          display: flex;
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .slide {
+          flex: 0 0 100%;
+          position: relative;
+      }
+
+      .slide img {
+          width: 100%;
+          height: 400px;
+          object-fit: cover;
+          display: block;
+      }
+
+      .slider-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255, 255, 255, 0.9);
+          color: #333;
+          border: none;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          cursor: pointer;
+          z-index: 10;
+          font-size: 18px;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .slider-arrow:hover {
+          background: white;
+          transform: translateY(-50%) scale(1.1);
+      }
+
+      .arrow-left { left: 15px; }
+      .arrow-right { right: 15px; }
+
+      /* Custom styles for script slider arrows */
+      .hero-slider2 .slider-arrow {
+          background-color: #000000;
+      }
+      .hero-slider2 .slider-arrow i {
+          color: #15ff00;
+      }
+
+      .dots-container {
+          text-align: center;
+          padding: 15px 0;
+          position: absolute;
+          bottom: -10px;
+          width: 100%;
+      }
+
+      .dot {
+          height: 10px;
+          width: 10px;
+          margin: 0 5px;
+          background-color: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          display: inline-block;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+
+      .dot.active {
+          background-color: white;
+          width: 30px;
+          border-radius: 5px;
+      }
+
+      /* Section Title */
+      .section-title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 40px 0 20px;
+          padding: 0 10px;
+      }
+
+      .section-title h2 {
+          font-size: 28px;
+          color: white;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .section-title a {
+          color: rgba(255, 255, 255, 0.9);
+          text-decoration: none;
+          font-size: 14px;
+          transition: color 0.3s;
+      }
+
+      .section-title a:hover {
+          color: white;
+      }
+
+      /* App Grid */
+      .app-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+          margin-bottom: 40px;
+      }
+
+      .app-card {
+          background: rgb(255, 255, 255);
+          border-radius: 15px;
+          padding: 20px;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+          transition: all 0.3s ease;
+          cursor: pointer;
+      }
+
+      .app-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .app-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 15px;
+          object-fit: cover;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .app-info h3 {
+          font-size: 18px;
+          margin-bottom: 5px;
+          color: #333;
+      }
+
+      .app-info p {
+          font-size: 13px;
+          color: #666;
+      }
+
+      .download-btn {
+          background: linear-gradient(135deg, #000000 0%, #000000 100%);
+          color: white;
+          border: none;
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          margin-left: auto; /* Pushes the button to the right */
+      }
+
+      .download-btn:hover {
+          transform: scale(1.1);
+          box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+      
+      /* Script Slider */
+      .hero-slider2 .slider-page {
+          flex: 0 0 100%;
+          min-width: 100%;
+      }
+
+      /* Script Cards */
+      .script-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-bottom: 40px;
+      }
+      
+      .hero-slider2 .script-grid {
+          grid-template-columns: repeat(var(--scripts-per-page, 3), 1fr);
+      }
+
+      .script-card {
+          background: rgba(255, 255, 255, 0.959);
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+          transition: all 0.3s ease;
+      }
+
+      .script-card:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .script-image {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+      }
+
+      .script-content {
+          padding: 20px;
+      }
+
+      .script-title {
+          font-size: 22px;
+          margin-bottom: 15px;
+          color: #333;
+      }
+
+      .key-box {
+          background: #f8f9fa;
+          border: 2px dashed #dee2e6;
+          border-radius: 10px;
+          padding: 15px;
+          margin-bottom: 15px;
+          font-family: 'Courier New', monospace;
+          font-size: 13px;
+          color: #495057;
+          word-wrap: break-word;
+          max-height: 100px;
+          overflow-y: auto;
+      }
+
+      .copy-button {
+          width: 100%;
+          padding: 12px;
+          background: linear-gradient(135deg, #a7a8ac 0%, #1a191b 100%);
+          color: white;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-size: 15px;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+      }
+
+      .copy-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .copy-button.copied {
+          background: linear-gradient(135deg, #039625 0%, #03c288 100%);
+      }
+      
+      /* Modal */
+      @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+      }
+      @keyframes slideUp {
+          from { transform: translateY(50px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+      }
+
+      .modal-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(5px);
+          z-index: 1000;
+          align-items: center;
+          justify-content: center;
+          animation: fadeIn 0.3s ease;
+      }
+
+      .modal-overlay.visible {
+          display: flex;
+      }
+
+      .modal-content {
+          background: white;
+          padding: 30px;
+          border-radius: 20px;
+          width: 90%;
+          max-width: 450px;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+          position: relative;
+          animation: slideUp 0.3s ease;
+          text-align: center;
+      }
+
+      .modal-header {
+          text-align: center;
+          margin-bottom: 25px;
+      }
+      .modal-header h2 {
+          font-size: 24px;
+          margin-bottom: 8px;
+          color: #333;
+      }
+      .modal-header p {
+          color: #666;
+          font-size: 14px;
+      }
+
+      .close-btn {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: none;
+          border: none;
+          font-size: 28px;
+          color: #999;
+          cursor: pointer;
+          transition: color 0.3s;
+      }
+      .close-btn:hover { color: #333; }
+
+      .modal-app-icon {
+          width: 100px;
+          height: 100px;
+          border-radius: 22px;
+          margin: 0 auto 20px;
+          display: block;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .unlock-btn {
+          width: 100%;
+          padding: 15px;
+          background: linear-gradient(135deg, #000000 0%, #202524 100%);
+          color: white;
+          border: none;
+          border-radius: 12px;
+          font-size: 16px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 20px;
+      }
+      .unlock-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
+      }
+      
+      /* Login Modal */
+      .login-overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.85);
+          backdrop-filter: blur(8px);
+          z-index: 2000;
+          align-items: center;
+          justify-content: center;
+          animation: fadeIn 0.3s ease;
+      }
+
+      .login-content {
+          background: #ffffff;
+          padding: 40px;
+          border-radius: 20px;
+          width: 90%;
+          max-width: 400px;
+          box-shadow: 0 10px 50px rgba(0, 0, 0, 0.4);
+          text-align: center;
+          position: relative;
+          animation: slideUp 0.4s ease;
+      }
+      .login-content h2 {
+          margin-bottom: 25px;
+          font-size: 26px;
+          color: #333;
+      }
+      #login-form input {
+          width: 100%;
+          padding: 15px 15px 15px 45px; /* Add left padding for icon */
+          margin-bottom: 20px;
+          border-radius: 10px;
+          border: 1px solid #ddd;
+          font-size: 16px;
+      }
+      #login-form .input-container {
+        position: relative;
+      }
+      #login-form .input-container i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-75%);
+        color: #999;
+      }
+      #login-form button {
+          width: 100%;
+          padding: 15px;
+          border: none;
+          background: linear-gradient(135deg, #000000 0%, #353535 100%);
+          color: white;
+          border-radius: 10px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+      #login-form button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+      .login-error-message {
+          color: #d9534f;
+          margin-top: 15px;
+          font-size: 14px;
+          height: 20px;
+      }
+      
+      /* Admin Dashboard */
+      #admin-content {
+          color: white;
+          background: rgba(10, 20, 30, 0.4);
+          border-radius: 20px;
+          padding: 20px 30px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(5px);
+          margin-top: 20px;
+      }
+
+      .admin-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-bottom: 40px;
+      }
+
+      .admin-card {
+          background: rgba(255, 255, 255, 0.07);
+          border-radius: 15px;
+          padding: 25px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+      }
+      .admin-card:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .stat-card {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          flex-direction: row;
+      }
+      .stat-card i {
+          font-size: 32px;
+          color: #47fa00;
+          padding: 15px;
+          background: rgba(0, 0, 0, 0.3);
+          border-radius: 50%;
+          width: 64px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 4px 15px rgba(71, 250, 0, 0.2);
+      }
+      .stat-info .stat-number {
+          display: block;
+          font-size: 32px;
+          font-weight: 800;
+          line-height: 1.2;
+      }
+      .stat-info .stat-label {
+          font-size: 14px;
+          color: #aaa;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+      }
+
+      .manage-card h3 {
+          font-size: 22px;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+      }
+      .manage-card h3 i {
+          color: #667eea;
+      }
+      .manage-card p {
+          font-size: 14px;
+          color: #ccc;
+          margin-bottom: 20px;
+          line-height: 1.6;
+          flex-grow: 1;
+      }
+      .manage-card .manage-btn, #add-script-form button {
+          width: 100%;
+          padding: 12px;
+          border: none;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          border-radius: 10px;
+          font-size: 15px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      }
+      #logout-btn {
+          width: auto;
+          padding: 10px 20px;
+          font-size: 14px;
+          height: auto;
+      }
+      .manage-card .manage-btn:hover, #add-script-form button:hover, #logout-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 15px rgba(102, 126, 234, 0.3);
+          filter: brightness(1.1);
+      }
+      
+      #add-script-form { display: flex; flex-direction: column; gap: 15px; }
+      #add-script-form input, #add-script-form textarea {
+          width: 100%;
+          padding: 12px 15px;
+          background: rgba(0, 0, 0, 0.4);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          color: white;
+          font-size: 14px;
+          transition: border-color 0.3s;
+      }
+      #add-script-form input:focus, #add-script-form textarea:focus {
+          outline: none;
+          border-color: #667eea;
+      }
+      #add-script-form textarea {
+          resize: vertical;
+          min-height: 80px;
+          font-family: 'Courier New', monospace;
+      }
+      #add-script-form input::placeholder, #add-script-form textarea::placeholder { color: #888; }
+      
+      /* --- Profile Card Slider --- */
+      .slider-container {
+          position: relative;
+          width: 100%; 
+          max-width: 340px; 
+          margin: 40px auto; 
+          padding: 0 15px; 
+      }
+      .script-slider-wrapper {
+          display: none;
+          opacity: 0;
+          transition: opacity 0.4s ease-in-out;
+      }
+      .script-slider-wrapper.active {
+          display: block;
+          opacity: 1;
+      }
+      .profile-container {
+          background-color: var(--card-bg-color);
+          border-radius: 24px;
+          border: 2px solid var(--border-color);
+          box-shadow: 6px 6px 0 0 var(--shadow-color);
+          width: 100%; 
+          padding: 25px;
+          box-sizing: border-box;
+          text-align: center;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .mainImage {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid var(--border-color);
+          margin-bottom: 15px;
+          padding: 4px;
+          background-color: #fff;
+      }
+      .pageTitle {
+          font-size: 2em;
+          font-weight: 800;
+          color: var(--text-color);
+          margin: 0 0 25px;
+      }
+      .info-box {
+          background-color: var(--placeholder-bg);
+          border-radius: 16px;
+          padding: 10px 20px;
+          margin-bottom: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 2px solid #e9e5ee;
+      }
+      .info-box span {
+          font-size: 1.1em;
+          font-weight: 700;
+          color: var(--text-color);
+          word-break: break-all;
+          text-align: left;
+      }
+      .info-box .copy-button {
+          background-color: #fff;
+          border: 2px solid var(--border-color);
+          color: var(--text-color);
+          border-radius: 12px;
+          cursor: pointer;
+          font-size: 1.2em;
+          width: 40px;
+          height: 40px;
+          margin-left: 10px;
+          box-shadow: 2px 2px 0 0 var(--shadow-color);
+          transition: all 0.2s ease;
+      }
+      .info-box .copy-button:hover {
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 4px 4px 0 0 var(--shadow-color);
+      }
+      .info-box .copy-button:active {
+          transform: translateY(1px);
+          box-shadow: 1px 1px 0 0 var(--shadow-color);
+      }
+      .info-box .copy-button .fa-check { color: var(--accent-green); }
+
+      .slider-controls {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 25px;
+          padding: 0 10px;
+      }
+      .slider-controls .slider-arrow {
+          position: static;
+          transform: none;
+          background-color: var(--accent-pink);
+          border: 2px solid var(--border-color);
+          color: var(--border-color);
+          border-radius: 50%;
+          width: 45px;
+          height: 45px;
+          font-size: 18px;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-shadow: 2px 2px 0 0 var(--border-color);
+          transition: all 0.2s ease;
+      }
+      .slider-controls .slider-arrow:hover {
+          transform: translateY(-2px) scale(1.05);
+          box-shadow: 4px 4px 0 0 var(--border-color);
+      }
+      .slider-controls .slider-arrow:active {
+          transform: translateY(1px);
+          box-shadow: 1px 1px 0 0 var(--border-color);
+      }
+      .progress-indicator { display: flex; gap: 10px; }
+      .indicator-item {
+          font-size: 14px;
+          color: #ddd;
+          transition: color 0.3s ease, transform 0.3s ease;
+      }
+      .indicator-item.active {
+          color: var(--accent-pink);
+          transform: scale(1.4);
+      }
+
+      /* Footer */
+      #footer-contact {
+          background-color: #000000;
+          color: #f0f0f0;
+          padding: 50px 20px;
+          margin-top: 30px;
+          background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0.02) 75%, transparent 75%, transparent);
+          background-size: 30px 30px;
+      }
+      .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 40px;
+      }
+      .footer-section h3 {
+          font-size: 18px;
+          margin-bottom: 20px;
+          font-weight: bold;
+          position: relative;
+          padding-bottom: 10px;
+      }
+      .footer-section h3::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 35px;
+          height: 3px;
+          background-color: #667eea;
+          border-radius: 2px;
+      }
+      .footer-logo-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          text-decoration: none;
+          color: inherit;
+      }
+      .footer-logo {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-right: 12px;
+          border: 2px solid #667eea;
+      }
+      .footer-logo-text { font-size: 22px; font-weight: bold; }
+      .about-section p { line-height: 1.7; color: #ccc; margin-bottom: 20px; }
+      .social-links { display: flex; justify-content: flex-start; gap: 20px; }
+      .social-links a {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          text-decoration: none;
+          font-size: 18px;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      .social-links a:hover {
+          background-color: #667eea;
+          transform: translateY(-3px);
+      }
+      .footer-section ul { list-style: none; padding: 0; margin: 0; }
+      .footer-section ul li { margin-bottom: 12px; }
+      .footer-section ul a, .contact-info span {
+          color: #ccc;
+          text-decoration: none;
+          transition: color 0.3s ease, padding-left 0.3s ease;
+      }
+      .footer-section ul a:hover {
+          color: #667eea;
+          padding-left: 5px;
+      }
+      .contact-info li { display: flex; align-items: center; }
+      .contact-info i { margin-right: 12px; font-size: 16px; width: 20px; text-align: center; }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          .slide img { height: 250px; }
+          .section-title h2 { font-size: 22px; }
+          .app-grid, .script-grid, .admin-grid { grid-template-columns: 1fr; }
+          .hero-slider2 .script-grid { grid-template-columns: 1fr; }
+          .slider-arrow { width: 35px; height: 35px; font-size: 14px; }
+          .arrow-left { left: 10px; }
+          .arrow-right { right: 10px; }
+      }
+      @media (min-width: 768px) {
+          .footer-content { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+      }
+      @media (min-width: 1200px) {
+          .slide img { height: 500px; }
+          .app-grid { grid-template-columns: repeat(2, 1fr); }
+          .script-grid { grid-template-columns: repeat(3, 1fr); }
+      }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="header">
         <div class="logo">
             <a href="/index.html">
@@ -1080,11 +886,8 @@
         </button>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- This wrapper will contain the public content that will be hidden after login -->
         <div id="public-content">
-            <!-- Hero Slider -->
             <div class="hero-slider" id="banner-slider">
                 <div class="slider-wrapper"></div>
                 <button class="slider-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1092,7 +895,6 @@
                 <div class="dots-container"></div>
             </div>
 
-            <!-- Roblox Hacks Section -->
             <div class="section-title">
                 <h2><i class="fa-solid fa-fire"></i> Roblox Hacks</h2>
                 <a href="#">View All <i class="fa-solid fa-arrow-right"></i></a>
@@ -1109,7 +911,6 @@
                         <i class="fa-solid fa-download"></i>
                     </button>
                 </div>
-
                 <div class="app-card" data-app="krnl">
                     <img src="https://krnl-ios.com/unnamed.png" alt="KRNL" class="app-icon">
                     <div class="app-info">
@@ -1122,7 +923,6 @@
                 </div>
             </div>
 
-            <!-- Scripts Slider Section -->
             <div class="section-title">
                 <h2><i class="fa-solid fa-code"></i> Featured Scripts</h2>
                 <a href="#">More Scripts <i class="fa-solid fa-arrow-right"></i></a>
@@ -1130,28 +930,35 @@
 
             <div class="hero-slider2" id="banner-slider2">
                 <div class="slider-wrapper" id="script-slider-wrapper"></div>
-                <button class="slider-arrow arrow-left" id="script-left" style="background-color: #000000;"><i class="fa-solid fa-chevron-left" style="color: #47fa00;"></i></button>
-                <button class="slider-arrow arrow-right" id="script-right" style="background-color: #000000;"><i class="fa-solid fa-chevron-right" style="color: #15ff00;"></i></button>
+                <button class="slider-arrow arrow-left" id="script-left"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-arrow arrow-right" id="script-right"><i class="fa-solid fa-chevron-right"></i></button>
                 <div class="dots-container" id="script-dots"></div>
             </div>
 
-            <!-- All Scripts Section -->
             <div class="section-title">
                 <h2><i class="fa-solid fa-code"></i> Popular Scripts</h2>
                 <a href="#">More Scripts <i class="fa-solid fa-arrow-right"></i></a>
             </div>
 
             <div class="script-grid" id="scripts-container"></div>
+            
+            
+
         </div>
 
-        <!-- START: NEW ADMIN CONTENT (Hidden by default) -->
         <div id="admin-content" style="display: none;">
             <div class="section-title" style="margin-top: 0; align-items: center;">
                 <h2><i class="fa-solid fa-tachometer-alt" style="color: #667eea;"></i> Admin Dashboard</h2>
-                <button id="logout-btn" class="manage-btn" style="width: auto; padding: 10px 20px; font-size: 14px; height: auto;"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
+                <button id="logout-btn" class="manage-btn"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
             </div>
 
-            <!-- Stats Grid -->
+            <div class="hero-slider" id="admin-banner2-slider">
+                <div class="slider-wrapper"></div>
+                <button class="slider-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="slider-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="dots-container"></div>
+            </div>
+            
             <div class="admin-grid" id="stats-grid">
                 <div class="admin-card stat-card">
                     <i class="fa-solid fa-cloud-download-alt"></i>
@@ -1163,174 +970,33 @@
                 <div class="admin-card stat-card">
                     <i class="fa-solid fa-scroll"></i>
                     <div class="stat-info">
-                        <span class="stat-number">9</span>
-                        <span class="stat-label">Featured Scripts</span>
-                    </div>
-                </div>
-                <div class="admin-card stat-card">
-                    <i class="fa-solid fa-users-viewfinder"></i>
-                    <div class="stat-info">
-                        <span class="stat-number">350</span>
-                        <span class="stat-label">Daily Visitors</span>
+                        <span class="stat-number" id="script-count">0</span>
+                        <span class="stat-label">Total Scripts</span>
                     </div>
                 </div>
             </div>
+            
+            <div class="slider-container"></div>
 
-            <!-- Management Grid -->
             <div class="section-title">
                 <h2><i class="fa-solid fa-cogs" style="color: #667eea;"></i> Management Tools</h2>
             </div>
 
             <div class="admin-grid" id="management-grid">
-                <!-- Add New Script Card -->
                 <div class="admin-card manage-card">
                     <h3><i class="fa-solid fa-plus-circle"></i> Add New Script</h3>
-                    <p>Add a new script to the public listings.</p>
+                    <p>Add a new script to the public listings. Saved to local storage.</p>
                     <form id="add-script-form">
-                        <input type="text" placeholder="Script Title" required>
-                        <input type="url" placeholder="Image URL" required>
-                        <textarea placeholder="Paste Script Key Here..." required></textarea>
+                        <input type="text" id="new-script-title" placeholder="Script Title" required>
+                        <input type="url" id="new-script-image" placeholder="Image URL" required>
+                        <textarea id="new-script-key" placeholder="Paste Script Key Here..." required></textarea>
                         <button type="submit"><i class="fa-solid fa-plus"></i> Add Script</button>
                     </form>
                 </div>
-
-                <!-- Manage Banners Card -->
-                <div class="admin-card manage-card">
-                    <h3><i class="fa-regular fa-images"></i> Manage Banners</h3>
-                    <p>Update, add, or remove the hero slider banners.</p>
-                    <button class="manage-btn"><i class="fa-solid fa-edit"></i> Manage Banners</button>
-                </div>
-
-                <!-- Site Settings Card -->
-                <div class="admin-card manage-card">
-                    <h3><i class="fa-solid fa-sliders"></i> Site Settings</h3>
-                    <p>Update site title, logo, and other global settings.</p>
-                    <button class="manage-btn"><i class="fa-solid fa-gear"></i> Go to Settings</button>
-                </div>
-            </div>
-
-            <!-- User Data & Chat Management System -->
-            <div id="user-chat-grid">
-                <div class="section-title">
-                    <h2><i class="fa-solid fa-users" style="color: #667eea;"></i> User & Chat Data</h2>
-                </div>
-                <div class="admin-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
-                    <!-- User Management Card -->
-                    <div class="admin-card manage-card">
-                        <h3><i class="fa-solid fa-users-cog"></i> User Management</h3>
-                        <p>Add, edit, or remove users and track their usage.</p>
-                        <form id="add-user-form">
-                            <input type="text" id="username" placeholder="Username" required>
-                            <input type="number" id="usage" placeholder="Initial Usage ($)" required>
-                            <button type="submit" class="manage-btn"><i class="fa-solid fa-user-plus"></i> Add User</button>
-                        </form>
-                        <div style="overflow-x: auto; margin-top: 20px;">
-                            <table id="user-table" style="width: 100%; color: white; border-collapse: collapse;">
-                                <thead>
-                                    <tr>
-                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Username</th>
-                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Join Date</th>
-                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Usage ($)</th>
-                                        <th style="padding: 10px; border-bottom: 1px solid #667eea; text-align: left;">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="user-table-body">
-                                    <!-- User data will be inserted here -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Live Chat Card -->
-                    <div class="admin-card manage-card">
-                        <h3><i class="fa-solid fa-comments"></i> Live Chat</h3>
-                        <p>View and respond to user messages here.</p>
-                        <div id="chat-display" class="chat-display"></div>
-                        <form id="chat-form">
-                            <input type="text" id="chat-input" placeholder="Type a message..." required autocomplete="off">
-                            <button type="submit" id="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Prostate Cancer Circle Data -->
-            <div class="section-title">
-                <h2><i class="fa-solid fa-chart-pie" style="color: #667eea;"></i> Prostate Cancer Statistics</h2>
-            </div>
-            <div class="admin-grid" id="prostate-stats-grid">
-                <!-- Stage at Diagnosis Card -->
-                <div class="admin-card prostate-stat-card">
-                    <h3>Stage at Diagnosis</h3>
-                    <div class="circle-chart" style="--p1: 70%; --p2: 84%; --p3: 93%;">
-                        <div class="circle-chart-inner-text">
-                            <span class="main-stat">70%</span>
-                            <span class="sub-stat">Localized</span>
-                        </div>
-                    </div>
-                    <div class="chart-legend">
-                        <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: #667eea;"></span>
-                            <span>Localized: 70%</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: #47fa00;"></span>
-                            <span>Regional: 14%</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: #d9534f;"></span>
-                            <span>Distant: 9%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Age at Diagnosis Card -->
-                <div class="admin-card prostate-stat-card">
-                    <h3>Age at Diagnosis (Ages 55-69)</h3>
-                    <div class="circle-chart" style="--p1: 52%; --p2: 52%; --p3: 52%;">
-                        <div class="circle-chart-inner-text">
-                            <span class="main-stat">52%</span>
-                            <span class="sub-stat">of cases</span>
-                        </div>
-                    </div>
-                    <div class="chart-legend">
-                        <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: #667eea;"></span>
-                            <span>Ages 55-69: 52%</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: rgba(255, 255, 255, 0.1);"></span>
-                            <span>Other Ages: 48%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5-Year Survival Rate Card -->
-                <div class="admin-card prostate-stat-card">
-                    <h3>5-Year Relative Survival Rate</h3>
-                    <div class="circle-chart" style="--p1: 95%; --p2: 95%; --p3: 95%;">
-                         <div class="circle-chart-inner-text">
-                            <span class="main-stat">95%</span>
-                            <span class="sub-stat">Survival</span>
-                        </div>
-                    </div>
-                    <div class="chart-legend">
-                         <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: #667eea;"></span>
-                            <span>Survives 5+ years: 95%</span>
-                        </div>
-                        <div class="legend-item">
-                            <span class="legend-color-box" style="background-color: rgba(255, 255, 255, 0.1);"></span>
-                            <span>Mortality within 5 years: 5%</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-        <!-- END: NEW ADMIN CONTENT -->
     </div>
 
-    <!-- Download Modal -->
     <div class="modal-overlay" id="downloadModal">
         <div class="modal-content">
             <button class="close-btn">&times;</button>
@@ -1339,8 +1005,8 @@
                 <p>Your download is prepared</p>
             </div>
             <img src="" alt="App Icon" class="modal-app-icon" id="modal-icon">
-            <h3 class="modal-app-name" id="modal-app-name"></h3>
-            <p class="modal-description">Thanks for your support! Click below to start your download.</p>
+            <h3 id="modal-app-name" style="margin-bottom: 8px;"></h3>
+            <p>Thanks for your support! Click below to start your download.</p>
             <button class="unlock-btn" id="final-download">
                 <i class="fa-solid fa-download"></i>
                 <span>Download Now</span>
@@ -1348,15 +1014,14 @@
         </div>
     </div>
     
-    <!-- LOGIN MODAL HTML -->
     <div class="login-overlay" id="login-overlay">
         <div class="login-content">
             <button class="close-btn" id="close-login-btn">&times;</button>
             <h2>Admin Login</h2>
             <form id="login-form">
-                <div style="position: relative;">
-                    <i class="fa-solid fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-75%); color: #999;"></i>
-                    <input type="password" id="password-input" placeholder="Enter Password" style="padding-left: 45px;" required>
+                <div class="input-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password-input" placeholder="Enter Password" required>
                 </div>
                 <button type="submit">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
                 <p id="login-error" class="login-error-message"></p>
@@ -1364,7 +1029,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer id="footer-contact">
         <div class="footer-content">
             <div class="footer-section about-section">
@@ -1397,133 +1061,192 @@
                     <li><i class="fas fa-info-circle"></i> <span>We do not offer direct phone or email support at this time.</span></li>
                 </ul>
             </div>
-            <div class="footer-section language-section">
-                <h3>Language</h3>
-                <div class="language-selector">
-                    <a href="#" class="active" lang="en">English</a>
-                    <a href="#" lang="km">ខ្མែរ</a>
-                </div>
-            </div>
         </div>
     </footer>
+
     <script>
-        // Banner Slider Data
-        const banners = [
-            "https://i.pinimg.com/736x/0e/be/63/0ebe63a7b480ea035e83ca3e5e419ad5.jpg",
-            "https://i.pinimg.com/1200x/62/5d/af/625daf1f2dccfced38f1a879205653e1.jpg",
-            "https://i.pinimg.com/736x/a1/1f/4f/a11f4fb56c576b01a5a1dc1075efb425.jpg"
-        ];
-
-        // Scripts Data - Extended for slider
-        const allScripts = [{
-                title: "Rivals",
-                image: "https://i.pinimg.com/736x/45/09/cb/4509cb26743359aafdfec9447342184d.jpg",
-                key: 'loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Kiciahook-OP-Silent-Aim-Kill-All-Unlock-All-Undetected-Best-39936"))()'
-            },
-            {
-                title: "99 nights in the forest",
-                image: "https://i.pinimg.com/736x/87/d4/71/87d471612e657d34c4321dea81a5a001.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/arsenal-esp/main.lua"))()'
-            },
-            {
-                title: "steal a brainrot",
-                image: "https://i.pinimg.com/736x/82/a1/b4/82a1b4b6aba4e971613e91d6507a3ee4.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/brookhaven-rp/main.lua"))()'
-            },
-            {
-                title: "Blox Fruits",
-                image: "https://i.pinimg.com/736x/19/dd/b0/19ddb0c12ec6c1a555dcea62dbc72812.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/bloxfruits-hub/main.lua"))()'
-            },
-            {
-                title: "Adopt Me",
-                image: "https://i.pinimg.com/1200x/5f/f8/46/5ff846845666ac6899ad02fb6435fb6f.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/adoptme-auto/main.lua"))()'
-            },
-            {
-                title: "Murder Mystery 2",
-                image: "https://i.pinimg.com/736x/9f/75/04/9f750474b61350805d7a1526c60baebf.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/mm2-esp/main.lua"))()'
-            },
-            {
-                title: "Jailbreak",
-                image: "https://i.pinimg.com/1200x/54/50/a5/5450a5f483a96bd00f8056d4909abd64.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/jailbreak-auto/main.lua"))()'
-            },
-            {
-                title: "Pet Simulator X",
-                image: "https://i.pinimg.com/736x/ca/67/74/ca6774b1e1c8e34f6b79acf7ddbd48be.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/psx-dupe/main.lua"))()'
-            },
-            {
-                title: "Tower of Hell",
-                image: "https://i.pinimg.com/736x/4e/29/36/4e29361165667d025608dd22104c3ed8.jpg",
-                key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/toh-skip/main.lua"))()'
-            }
-        ];
-
-        // App Data
-        const apps = {
-            delta: {
-                name: "Roblox (Delta)",
-                icon: "https://deltaios-executor.com/Icon.jpg",
-                url: "https://deltaios-executor.com/#popup1"
-            },
-            krnl: {
-                name: "Roblox (KRNL)",
-                icon: "https://krnl-ios.com/unnamed.png",
-                url: "https://krnl-ios.com/#popup1"
-            }
-        };
-
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Initialize Banner Slider
-            const sliderWrapper = document.querySelector('#banner-slider .slider-wrapper');
-            const dotsContainer = document.querySelector('#banner-slider .dots-container');
-            let currentSlide = 0;
+            // --- 🔴 CRITICAL SECURITY WARNING ---
+            // The data below is visible to ANYONE who visits your website.
+            // A malicious user can steal your Bot Token and take control of your bot.
+            // They can also find the password and access your admin panel.
+            // This information MUST be moved to a secure backend server (e.g., using Python Flask or Node.js).
+            const TELEGRAM_BOT_TOKEN = '7586151294:AAE56w1KsB01qmfebOY4jccne2VI11ueMqM'; // <-- EXPOSED!
+            const TELEGRAM_CHAT_ID = '1732455712';
+            const CORRECT_PASSWORD = "nhoy"; // <-- EXPOSED!
+            // --- END OF SECURITY WARNING ---
 
-            banners.forEach((banner, idx) => {
-                const slide = document.createElement('div');
-                slide.className = 'slide';
-                slide.innerHTML = `<img src="${banner}" alt="Banner ${idx + 1}" loading="lazy">`;
-                sliderWrapper.appendChild(slide);
+            const banners = [
+                "https://i.pinimg.com/736x/0e/be/63/0ebe63a7b480ea035e83ca3e5e419ad5.jpg",
+                "https://i.pinimg.com/1200x/62/5d/af/625daf1f2dccfced38f1a879205653e1.jpg",
+                "https://i.pinimg.com/736x/a1/1f/4f/a11f4fb56c576b01a5a1dc1075efb425.jpg"
+            ];
+            const banners2 = [
+                "https://i.pinimg.com/736x/07/f2/6c/07f26c78ee066530183f4b39d070db7b.jpg",
+                "https://i.pinimg.com/736x/a7/68/f7/a768f7225b749c23c7e10e429e2c47f0.jpg",
+                "https://i.pinimg.com/originals/72/b1/e0/72b1e09339ac99ce234b3ac9cdcccaa9.gif",
+                "https://i.pinimg.com/736x/c0/89/61/c08961e7a87c762b879be0752a85da36.jpg"
+            ];
 
-                const dot = document.createElement('span');
-                dot.className = 'dot';
-                if (idx === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(idx));
-                dotsContainer.appendChild(dot);
-            });
+            const defaultScripts = [{
+                    title: "Rivals",
+                    image: "https://i.pinimg.com/736x/45/09/cb/4509cb26743359aafdfec9447342184d.jpg",
+                    key: 'loadstring(game:HttpGet("https://rawscripts.net/raw/RIVALS-Kiciahook-OP-Silent-Aim-Kill-All-Unlock-All-Undetected-Best-39936"))()'
+                },
+                {
+                    title: "99 nights in the forest",
+                    image: "https://i.pinimg.com/736x/87/d4/71/87d471612e657d34c4321dea81a5a001.jpg",
+                    key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/H4xScripts/Loader/refs/heads/main/loader.lua", true))()'
+                },
+                {
+                    title: "steal a brainrot",
+                    image: "https://i.pinimg.com/736x/82/a1/b4/82a1b4b6aba4e971613e91d6507a3ee4.jpg",
+                    key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/brookhaven-rp/main.lua"))()'
+                },
+                {
+                    title: "Blox Fruits",
+                    image: "https://i.pinimg.com/736x/19/dd/b0/19ddb0c12ec6c1a555dcea62dbc72812.jpg",
+                    key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/bloxfruits-hub/main.lua"))()'
+                },
+                {
+                    title: "Pet Simulator X",
+                    image: "https://i.pinimg.com/736x/a1/1f/4f/a11f4fb56c576b01a5a1dc1075efb425.jpg",
+                    key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/BlissfulHub/Pet-Simulator-X/main/Loader.lua"))()'
+                },
+                {
+                    title: "Anime Fighters Simulator",
+                    image: "https://i.pinimg.com/736x/45/09/cb/4509cb26743359aafdfec9447342184d.jpg",
+                    key: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/BlissfulHub/Anime-Fighters-Simulator/main/Loader.lua"))()'
+                }
+            ];
 
-            function updateSlider() {
-                sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-                document.querySelectorAll('#banner-slider .dot').forEach((dot, idx) => {
-                    dot.classList.toggle('active', idx === currentSlide);
+            const apps = {
+                delta: { name: "Roblox (Delta)", icon: "https://deltaios-executor.com/Icon.jpg", url: "https://deltaios-executor.com/#popup1" },
+                krnl: { name: "Roblox (KRNL)", icon: "https://krnl-ios.com/unnamed.png", url: "https://krnl-ios.com/#popup1" }
+            };
+
+            const profileAccounts = [{
+                name: "Myling",
+                image: "https://i.pinimg.com/originals/33/0e/e1/330ee11a3951e581a03065ea001a0e21.gif",
+                username: "@loblobji",
+                password: "oyuka2006$",
+                accentColor: "var(--accent-pink)"
+            }, {
+                name: "kai",
+                image: "https://i.pinimg.com/originals/a3/58/e2/a358e2ca581efb8af03a0af15f4f9457.gif",
+                username: "kai_11q",
+                password: "kai11q&@2003",
+                accentColor: "var(--accent-blue)"
+            }, {
+                name: "sai",
+                image: "https://i.pinimg.com/originals/19/70/91/19709128517fb9318521e6bed2c48d4b.gif",
+                username: "sai_11q",
+                password: "sai11q&@2003",
+                accentColor: "var(--accent-green)"
+            },
+            {
+                name: "nhahub",
+                image: "https://i.pinimg.com/originals/70/d8/24/70d824baf70606ddb18bdde4b7f253c6.gif",
+                username: "nhahub_11q",
+                password: "nhahub11q&@2003",
+                accentColor: "var(--accent-yellow)"
+            }
+            ];
+
+
+            let allScripts = [];
+
+            // --- TELEGRAM NOTIFICATIONS ---
+            async function sendTelegramMessage(message) {
+                if (!TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID') {
+                    console.warn("Telegram Chat ID is not set. Skipping notification.");
+                    return;
+                }
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                try {
+                    await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'Markdown' }),
+                    });
+                } catch (error) {
+                    console.error('Error sending Telegram message:', error);
+                }
+            }
+            async function sendCopyNotification(scriptTitle, scriptKey) {
+                const message = `🔔 *Script Copied!* 🔔\n\n*Title:* ${scriptTitle}\n*Time:* ${new Date().toLocaleString()}\n\n*Copied Script:*\n\`\`\`\n${scriptKey}\n\`\`\``;
+                sendTelegramMessage(message);
+            }
+            async function sendLoginNotification() {
+                const message = `🔐 *Admin Login Alert* 🔐\n\nSomeone just successfully logged into the admin panel for *nhoy Hub*.\n\n*Time:* ${new Date().toLocaleString()}`;
+                sendTelegramMessage(message);
+            }
+
+            // --- DATA INITIALIZATION ---
+            function loadData() {
+                const savedScripts = localStorage.getItem('nhoyHubScripts');
+                allScripts = savedScripts ? JSON.parse(savedScripts) : [...defaultScripts];
+            }
+
+            // --- UI RENDERING ---
+            function renderAllUI() {
+                renderAllScriptSections();
+                updateStatCards();
+            }
+
+            // --- BANNER SLIDER (MODIFIED) ---
+            function initializeGenericSlider(sliderId, bannerArray) {
+                const slider = document.querySelector(sliderId);
+                if (!slider) return;
+                
+                const sliderWrapper = slider.querySelector('.slider-wrapper');
+                const dotsContainer = slider.querySelector('.dots-container');
+                let currentSlide = 0;
+
+                sliderWrapper.innerHTML = ''; // Clear existing
+                dotsContainer.innerHTML = '';
+
+                bannerArray.forEach((banner, idx) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.innerHTML = `<img src="${banner}" alt="Banner ${idx + 1}" loading="lazy">`;
+                    sliderWrapper.appendChild(slide);
+
+                    const dot = document.createElement('span');
+                    dot.className = 'dot';
+                    dot.addEventListener('click', () => goToSlide(idx));
+                    dotsContainer.appendChild(dot);
                 });
-            }
 
-            function goToSlide(idx) {
-                currentSlide = idx;
+                function updateSlider() {
+                    if (sliderWrapper && sliderWrapper.style) {
+                        sliderWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+                    }
+                    slider.querySelectorAll('.dot').forEach((dot, idx) => {
+                        dot.classList.toggle('active', idx === currentSlide);
+                    });
+                }
+                function goToSlide(idx) {
+                    currentSlide = idx;
+                    updateSlider();
+                }
+                slider.querySelector('.arrow-left').addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + bannerArray.length) % bannerArray.length;
+                    updateSlider();
+                });
+                slider.querySelector('.arrow-right').addEventListener('click', () => {
+                    currentSlide = (currentSlide + 1) % bannerArray.length;
+                    updateSlider();
+                });
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % bannerArray.length;
+                    updateSlider();
+                }, 5000);
                 updateSlider();
             }
 
-            document.querySelector('#banner-slider .arrow-left').addEventListener('click', () => {
-                currentSlide = (currentSlide - 1 + banners.length) % banners.length;
-                updateSlider();
-            });
-
-            document.querySelector('#banner-slider .arrow-right').addEventListener('click', () => {
-                currentSlide = (currentSlide + 1) % banners.length;
-                updateSlider();
-            });
-
-            setInterval(() => {
-                currentSlide = (currentSlide + 1) % banners.length;
-                updateSlider();
-            }, 5000);
-
-            // Script Card Creator Function
+            // --- SCRIPT RENDERING ---
             function createScriptCard(script) {
                 const card = document.createElement('div');
                 card.className = 'script-card';
@@ -1538,10 +1261,10 @@
                         </button>
                     </div>
                 `;
-
                 const copyBtn = card.querySelector('.copy-button');
                 copyBtn.addEventListener('click', () => {
                     navigator.clipboard.writeText(script.key);
+                    sendCopyNotification(script.title, script.key);
                     copyBtn.classList.add('copied');
                     copyBtn.innerHTML = '<i class="fa-solid fa-check"></i><span>Copied!</span>';
                     setTimeout(() => {
@@ -1549,21 +1272,19 @@
                         copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i><span>Copy Script</span>';
                     }, 2000);
                 });
-
                 return card;
             }
 
-            // --- START: MODIFIED SCRIPT SLIDER LOGIC ---
-            const scriptSliderWrapper = document.getElementById('script-slider-wrapper');
-            const scriptDotsContainer = document.getElementById('script-dots');
-            let currentScriptSlide = 0;
-            let totalScriptPages = 0;
+            function renderAllScriptSections() {
+                const scriptSliderWrapper = document.getElementById('script-slider-wrapper');
+                const scriptDotsContainer = document.getElementById('script-dots');
+                const scriptsContainer = document.getElementById('scripts-container');
+                let currentScriptSlide = 0;
+                let totalScriptPages = 0;
 
-            function setupScriptSlider() {
                 scriptSliderWrapper.innerHTML = '';
                 scriptDotsContainer.innerHTML = '';
-                currentScriptSlide = 0;
-                const scriptsPerPage = window.innerWidth <= 768 ? 1 : 3;
+                const scriptsPerPage = window.innerWidth <= 768 ? 1 : (window.innerWidth <= 1200 ? 2 : 3);
                 totalScriptPages = Math.ceil(allScripts.length / scriptsPerPage);
 
                 for (let i = 0; i < totalScriptPages; i++) {
@@ -1572,333 +1293,187 @@
                     const grid = document.createElement('div');
                     grid.className = 'script-grid';
                     grid.style.setProperty('--scripts-per-page', scriptsPerPage);
-                    const startIdx = i * scriptsPerPage;
-                    const endIdx = Math.min(startIdx + scriptsPerPage, allScripts.length);
-                    for (let j = startIdx; j < endIdx; j++) {
-                        grid.appendChild(createScriptCard(allScripts[j]));
-                    }
+                    const pageScripts = allScripts.slice(i * scriptsPerPage, (i * scriptsPerPage) + scriptsPerPage);
+                    pageScripts.forEach(script => grid.appendChild(createScriptCard(script)));
                     page.appendChild(grid);
                     scriptSliderWrapper.appendChild(page);
+                    
                     const dot = document.createElement('span');
                     dot.className = 'dot';
-                    if (i === 0) dot.classList.add('active');
                     dot.addEventListener('click', () => goToScriptSlide(i));
                     scriptDotsContainer.appendChild(dot);
                 }
-                updateScriptSlider();
-            }
 
-            function updateScriptSlider() {
-                scriptSliderWrapper.style.transform = `translateX(-${currentScriptSlide * 100}%)`;
-                document.querySelectorAll('#script-dots .dot').forEach((dot, idx) => {
-                    dot.classList.toggle('active', idx === currentScriptSlide);
+                function updateScriptSlider() {
+                    scriptSliderWrapper.style.transform = `translateX(-${currentScriptSlide * 100}%)`;
+                    document.querySelectorAll('#script-dots .dot').forEach((dot, idx) => {
+                        dot.classList.toggle('active', idx === currentScriptSlide);
+                    });
+                }
+                function goToScriptSlide(idx) {
+                    currentScriptSlide = idx;
+                    updateScriptSlider();
+                }
+                document.getElementById('script-left').addEventListener('click', () => {
+                    currentScriptSlide = (currentScriptSlide - 1 + totalScriptPages) % totalScriptPages;
+                    updateScriptSlider();
+                });
+                document.getElementById('script-right').addEventListener('click', () => {
+                    currentScriptSlide = (currentScriptSlide + 1) % totalScriptPages;
+                    updateScriptSlider();
+                });
+                if (totalScriptPages > 0) updateScriptSlider();
+
+                scriptsContainer.innerHTML = '';
+                allScripts.forEach(script => {
+                    scriptsContainer.appendChild(createScriptCard(script));
                 });
             }
 
-            function goToScriptSlide(idx) {
-                currentScriptSlide = idx;
-                updateScriptSlider();
-            }
+            // --- PROFILE CARD SLIDER ---
+            function initializeProfileSlider() {
+                const sliderContainer = document.querySelector('.slider-container');
+                if (!sliderContainer) return;
 
-            document.getElementById('script-left').addEventListener('click', () => {
-                currentScriptSlide = (currentScriptSlide - 1 + totalScriptPages) % totalScriptPages;
-                updateScriptSlider();
-            });
+                let currentSlide = 0;
+                sliderContainer.innerHTML = '';
 
-            document.getElementById('script-right').addEventListener('click', () => {
-                currentScriptSlide = (currentScriptSlide + 1) % totalScriptPages;
-                updateScriptSlider();
-            });
+                profileAccounts.forEach((account, index) => {
+                    const slideWrapper = document.createElement('div');
+                    slideWrapper.classList.add('script-slider-wrapper');
+                    if (index === 0) slideWrapper.classList.add('active');
 
-            setupScriptSlider();
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(setupScriptSlider, 250);
-            });
-            // --- END: MODIFIED SCRIPT SLIDER LOGIC ---
+                    let indicatorsHTML = profileAccounts.map((_, i) => `<i class="indicator-item fa-solid fa-star ${i === index ? 'active' : ''}"></i>`).join('');
 
-            const scriptsContainer = document.getElementById('scripts-container');
-            allScripts.forEach(script => {
-                scriptsContainer.appendChild(createScriptCard(script));
-            });
+                    slideWrapper.innerHTML = `
+                        <div class="profile-container" style="--shadow-color: ${account.accentColor};">
+                            <img class="mainImage" src="${account.image}" alt="${account.name} visual" style="border-color: ${account.accentColor};">
+                            <h1 class="pageTitle">${account.name}</h1>
+                            <div class="info-box">
+                                <span>${account.username}</span>
+                                <button class="copy-button" data-copy-text="${account.username}" style="--shadow-color: ${account.accentColor};"><i class="fa-regular fa-user"></i></button>
+                            </div>
+                            <div class="info-box">
+                                <span>${account.password}</span>
+                                <button class="copy-button" data-copy-text="${account.password}" style="--shadow-color: ${account.accentColor};"><i class="fa-solid fa-lock"></i></button>
+                            </div>
+                            <div class="slider-controls">
+                                <button class="slider-arrow arrow-left" style="background-color: ${account.accentColor};"><i class="fa-solid fa-chevron-left"></i></button>
+                                <div class="progress-indicator">${indicatorsHTML}</div>
+                                <button class="slider-arrow arrow-right" style="background-color: ${account.accentColor};"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>`;
+                    sliderContainer.appendChild(slideWrapper);
+                });
 
-            // Modal functionality
-            const modal = document.getElementById('downloadModal');
-            const modalIcon = document.getElementById('modal-icon');
-            const modalAppName = document.getElementById('modal-app-name');
-            const finalDownloadBtn = document.getElementById('final-download');
-            const closeBtn = modal.querySelector('.close-btn');
-            let currentDownloadUrl = '';
+                function showSlide(index) {
+                    document.querySelectorAll('.slider-container .script-slider-wrapper').forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                }
 
-            document.querySelectorAll('.app-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    if (e.target.closest('.download-btn')) {
-                        const appType = card.dataset.app;
-                        const app = apps[appType];
-                        modalIcon.src = app.icon;
-                        modalAppName.textContent = app.name;
-                        currentDownloadUrl = app.url;
-                        modal.classList.add('visible');
+                sliderContainer.addEventListener('click', (e) => {
+                    const arrowLeft = e.target.closest('.slider-arrow.arrow-left');
+                    const arrowRight = e.target.closest('.slider-arrow.arrow-right');
+                    const copyBtn = e.target.closest('.copy-button');
+
+                    if (arrowLeft) {
+                        currentSlide = (currentSlide > 0) ? currentSlide - 1 : profileAccounts.length - 1;
+                        showSlide(currentSlide);
+                    }
+                    if (arrowRight) {
+                        currentSlide = (currentSlide < profileAccounts.length - 1) ? currentSlide + 1 : 0;
+                        showSlide(currentSlide);
+                    }
+                    if (copyBtn) {
+                        const textToCopy = copyBtn.getAttribute('data-copy-text');
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            const originalIcon = copyBtn.innerHTML;
+                            copyBtn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+                            setTimeout(() => { copyBtn.innerHTML = originalIcon; }, 2000);
+                        });
                     }
                 });
-            });
+            }
 
-            finalDownloadBtn.addEventListener('click', () => {
-                window.open(currentDownloadUrl, '_blank');
-                modal.classList.remove('visible');
-            });
+            // --- MODAL & LOGIN ---
+            function initializeModalsAndLogin() {
+                const modal = document.getElementById('downloadModal');
+                const closeBtn = modal.querySelector('.close-btn');
 
-            closeBtn.addEventListener('click', () => {
-                modal.classList.remove('visible');
-            });
-
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('visible');
-                }
-            });
-            
-            // --- START: LOGIN FUNCTIONALITY ---
-            const menuBtn = document.getElementById('menu-btn-action');
-            const loginOverlay = document.getElementById('login-overlay');
-            const closeLoginBtn = document.getElementById('close-login-btn');
-            const loginForm = document.getElementById('login-form');
-            const passwordInput = document.getElementById('password-input');
-            const loginError = document.getElementById('login-error');
-            const publicContent = document.getElementById('public-content');
-            const adminContent = document.getElementById('admin-content');
-            
-            const CORRECT_PASSWORD = "nhoy";
-            
-            menuBtn.addEventListener('click', () => {
-                loginOverlay.style.display = 'flex';
-                setTimeout(() => passwordInput.focus(), 100);
-            });
-            
-            closeLoginBtn.addEventListener('click', () => {
-                loginOverlay.style.display = 'none';
-                loginError.textContent = '';
-            });
-
-            loginOverlay.addEventListener('click', (e) => {
-                if (e.target === loginOverlay) {
-                    loginOverlay.style.display = 'none';
-                    loginError.textContent = '';
-                }
-            });
-            
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const enteredPassword = passwordInput.value;
-                
-                if (enteredPassword === CORRECT_PASSWORD) {
-                    loginForm.innerHTML = '<h3 style="color: #28a745;"><i class="fa-solid fa-check-circle"></i> Access Granted</h3>';
-                    setTimeout(() => {
-                        loginOverlay.style.display = 'none';
-                        publicContent.style.display = 'none';
-                        adminContent.style.display = 'block';
-                    }, 1000);
-                    
-                } else {
-                    loginForm.style.animation = 'shake 0.5s';
-                    loginError.textContent = 'Incorrect password.';
-                    passwordInput.value = '';
-                    passwordInput.focus();
-                    setTimeout(() => {
-                        loginForm.style.animation = '';
-                    }, 500);
-                }
-            });
-
-            const styleSheet = document.createElement("style");
-            styleSheet.innerText = `
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    25% { transform: translateX(-10px); }
-                    50% { transform: translateX(10px); }
-                    75% { transform: translateX(-10px); }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-            // --- END: LOGIN FUNCTIONALITY ---
-
-            // --- START: ADMIN PANEL INTERACTIVITY ---
-            const addScriptForm = document.getElementById('add-script-form');
-
-            if (addScriptForm) {
-                addScriptForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const submitBtn = addScriptForm.querySelector('button');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
-                    submitBtn.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
-                    addScriptForm.reset();
-
-                    setTimeout(() => {
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.style.background = '';
-                        alert('Script added to database (Demo Mode).');
-                    }, 1500);
-                });
-
-                document.querySelectorAll('.manage-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        if (!e.target.closest('form') && btn.id !== 'logout-btn') {
-                            alert('This feature is not available in the demo.');
+                document.querySelectorAll('.app-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        if (e.target.closest('.download-btn')) {
+                            const app = apps[card.dataset.app];
+                            document.getElementById('modal-icon').src = app.icon;
+                            document.getElementById('modal-app-name').textContent = app.name;
+                            document.getElementById('final-download').onclick = () => window.open(app.url, '_blank');
+                            modal.classList.add('visible');
                         }
                     });
                 });
-            }
-            // --- END: ADMIN PANEL INTERACTIVITY ---
+                closeBtn.addEventListener('click', () => modal.classList.remove('visible'));
+                modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('visible'); });
 
-            // --- START: LOGOUT FUNCTIONALITY ---
-            document.getElementById('logout-btn').addEventListener('click', () => {
-                adminContent.style.display = 'none';
-                publicContent.style.display = 'block';
-                // Also reset the login form in case it was left in a success state
-                loginForm.innerHTML = `
-                    <div style="position: relative;">
-                        <i class="fa-solid fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-75%); color: #999;"></i>
-                        <input type="password" id="password-input" placeholder="Enter Password" style="padding-left: 45px;" required>
-                    </div>
-                    <button type="submit">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
-                    <p id="login-error" class="login-error-message"></p>
-                 `;
-            });
-            // --- END: LOGOUT FUNCTIONALITY ---
+                const loginOverlay = document.getElementById('login-overlay');
+                const loginForm = document.getElementById('login-form');
+                
+                document.getElementById('menu-btn-action').addEventListener('click', () => loginOverlay.style.display = 'flex');
+                const closeLoginModal = () => loginOverlay.style.display = 'none';
+                document.getElementById('close-login-btn').addEventListener('click', closeLoginModal);
+                loginOverlay.addEventListener('click', (e) => { if(e.target === loginOverlay) closeLoginModal(); });
 
-            // --- START: USER DATA MANAGEMENT ---
-            const addUserForm = document.getElementById('add-user-form');
-            const userTableBody = document.getElementById('user-table-body');
-            
-            // Default user data to show if local storage is empty
-            const defaultUsers = [
-                { username: 'xX_Gamer_Xx', usage: 250, joinDate: new Date('2024-05-10T10:00:00Z').toISOString() },
-                { username: 'ScriptMaster', usage: 80, joinDate: new Date('2024-06-21T15:30:00Z').toISOString() },
-                { username: 'User123', usage: 120, joinDate: new Date('2024-07-01T08:45:00Z').toISOString() }
-            ];
-
-            let users = JSON.parse(localStorage.getItem('users'));
-
-            if (!users || users.length === 0) {
-                users = defaultUsers;
-                localStorage.setItem('users', JSON.stringify(users));
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const passwordInput = document.getElementById('password-input');
+                    if (passwordInput.value === CORRECT_PASSWORD) {
+                        sendLoginNotification();
+                        closeLoginModal();
+                        document.getElementById('public-content').style.display = 'none';
+                        document.getElementById('admin-content').style.display = 'block';
+                    } else {
+                        document.getElementById('login-error').textContent = 'Incorrect password.';
+                        passwordInput.value = '';
+                    }
+                });
+                 document.getElementById('logout-btn').addEventListener('click', () => location.reload());
             }
 
-            const renderUsers = () => {
-                userTableBody.innerHTML = '';
-                users.forEach((user, index) => {
-                    const row = `
-                        <tr data-index="${index}">
-                            <td style="padding: 10px;">${user.username}</td>
-                            <td style="padding: 10px;">${new Date(user.joinDate).toLocaleDateString()}</td>
-                            <td style="padding: 10px;">${user.usage}</td>
-                            <td style="padding: 10px;">
-                                <button class="edit-usage-btn manage-btn" style="width: auto; padding: 5px 10px; font-size: 12px;">Edit</button>
-                                <button class="delete-user-btn manage-btn" style="width: auto; padding: 5px 10px; font-size: 12px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">Delete</button>
-                            </td>
-                        </tr>
-                    `;
-                    userTableBody.insertAdjacentHTML('beforeend', row);
-                });
-            };
-
-            addUserForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-                const usage = document.getElementById('usage').value;
-                users.push({ username, usage, joinDate: new Date().toISOString() });
-                localStorage.setItem('users', JSON.stringify(users));
-                renderUsers();
-                addUserForm.reset();
-            });
-
-            userTableBody.addEventListener('click', (e) => {
-                const row = e.target.closest('tr');
-                if (!row) return;
-                const index = parseInt(row.dataset.index, 10);
-
-                if (e.target.classList.contains('edit-usage-btn')) {
-                    const newUsage = prompt('Enter new usage amount:', users[index].usage);
-                    if (newUsage && !isNaN(newUsage)) {
-                        users[index].usage = newUsage;
-                        localStorage.setItem('users', JSON.stringify(users));
-                        renderUsers();
-                    }
-                }
-
-                if (e.target.classList.contains('delete-user-btn')) {
-                    if (confirm('Are you sure you want to delete this user?')) {
-                        users.splice(index, 1);
-                        localStorage.setItem('users', JSON.stringify(users));
-                        renderUsers();
-                    }
-                }
-            });
-            renderUsers();
-            // --- END: USER DATA MANAGEMENT ---
-
-            // --- START: CHAT DATA STORE ---
-            const chatDisplay = document.getElementById('chat-display');
-            const chatForm = document.getElementById('chat-form');
-            const chatInput = document.getElementById('chat-input');
-            let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
-
-            const renderChat = () => {
-                chatDisplay.innerHTML = '';
-                chatHistory.forEach(msg => {
-                    const msgDiv = document.createElement('div');
-                    msgDiv.className = `chat-message ${msg.sender.toLowerCase()}-message`;
-                    
-                    const textSpan = document.createElement('span');
-                    textSpan.textContent = msg.text;
-                    
-                    const timeSpan = document.createElement('span');
-                    timeSpan.className = 'timestamp';
-                    timeSpan.textContent = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-                    msgDiv.appendChild(textSpan);
-                    msgDiv.appendChild(timeSpan);
-                    chatDisplay.appendChild(msgDiv);
-                });
-                chatDisplay.scrollTop = chatDisplay.scrollHeight;
-            };
-
-            const saveChat = () => {
-                localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-            };
-
-            chatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const messageText = chatInput.value.trim();
-                if (messageText) {
-                    const newMessage = {
-                        sender: 'Admin',
-                        text: messageText,
-                        timestamp: new Date()
+            // --- ADMIN PANEL ---
+            function initializeAdminPanel() {
+                const addScriptForm = document.getElementById('add-script-form');
+                addScriptForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const newScript = {
+                        title: document.getElementById('new-script-title').value,
+                        image: document.getElementById('new-script-image').value,
+                        key: document.getElementById('new-script-key').value
                     };
-                    chatHistory.push(newMessage);
-                    saveChat();
-                    renderChat();
-                    chatInput.value = '';
+                    allScripts.push(newScript);
+                    localStorage.setItem('nhoyHubScripts', JSON.stringify(allScripts));
+                    renderAllUI();
+                    addScriptForm.reset();
+                });
+            }
 
-                    // Simulate a user reply
-                    setTimeout(() => {
-                        const userReply = {
-                           sender: 'User',
-                           text: 'Thanks for the message! I will get back to you shortly.',
-                           timestamp: new Date()
-                        };
-                        chatHistory.push(userReply);
-                        saveChat();
-                        renderChat();
-                    }, 1500);
-                }
+            function updateStatCards() {
+                document.getElementById('script-count').textContent = allScripts.length;
+            }
+
+            // --- INITIAL LOAD (MODIFIED) ---
+            loadData();
+            renderAllUI();
+            initializeGenericSlider('#banner-slider', banners);
+            initializeGenericSlider('#admin-banner2-slider', banners2);
+            initializeProfileSlider();
+            initializeModalsAndLogin();
+            initializeAdminPanel();
+
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(renderAllScriptSections, 250);
             });
-
-            renderChat();
-            // --- END: CHAT DATA STORE ---
         });
     </script>
 </body>
